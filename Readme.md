@@ -18,10 +18,10 @@
 
 ### Integrantes:
 
-**Rodolfo Hernández Hernández 4º "A"** <br>
-**Fernando Miguel Pérez 4º "A"** <br>
-**Carlos Alberto Cabrera Solís 4º "A"** <br>
-**Juan Carlos Cobos Vega 4º "A"** <br>
+**Rodolfo Hernández Hernández 5º "A"** <br>
+**Fernando Miguel Pérez 5º "A"** <br>
+**Carlos Alberto Cabrera Solís 5º "A"** <br>
+**Juan Carlos Cobos Vega 5º "A"** <br>
 
 <table width="80%" margin="1">
 <tr>
