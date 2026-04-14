@@ -79,7 +79,7 @@ hr{
 /*Boton desplegable*/
 /* MENU LATERAL DESDE LA DERECHA */
 .overlay {
-    height: 260px;
+    height: 0;
     width: 200px;
     position: absolute;
     z-index: 1;
@@ -89,7 +89,7 @@ hr{
     overflow-y: hidden;
     transition: 0.5s;
     padding-top: 10px;
-    margin-right: 2px;
+    margin-right: 5px;
     border-radius: 0px 0px 10px 10px;
 }
 .overlay-content {

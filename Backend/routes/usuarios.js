@@ -9,31 +9,22 @@ const bcrypt = require('bcrypt'); // o bcryptjs si usaste ese
 router.post('/registro', async (req, res) => {
     const { nombre, correo, telefono, direccion, password } = req.body;
 
-    if (!nombre || !correo || !password) {
+    if (!nombre || !correo || !password || !telefono || !direccion) {
         return res.status(400).json({ error: "Faltan datos" });
     }
 
-    try {
-        const hash = await bcrypt.hash(password, 10);
+    const hash = await bcrypt.hash(password, 10);
 
-        const sql = `
-            INSERT INTO usuarios (nombre, correo, telefono, direccion, password)
-            VALUES (?, ?, ?, ?, ?)
-        `;
+    const sql = `
+        INSERT INTO usuarios (nombre, correo, telefono, direccion, password)
+        VALUES (?, ?, ?, ?, ?)
+    `;
 
-        db.query(sql, [nombre, correo, telefono, direccion, hash], (err) => {
-            if (err) {
-                console.error("Error DB:", err);
-                return res.status(500).json({ error: "Error al registrar" });
-            }
+    db.query(sql, [nombre, correo, telefono, direccion, hash], (err) => {
+        if (err) return res.status(500).json({ error: "Error DB" });
 
-            res.json({ mensaje: "Usuario registrado correctamente 🔥" });
-        });
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Error en servidor" });
-    }
+        res.json({ mensaje: "Usuario completo creado 🔥" });
+    });
 });
 
 
@@ -84,37 +75,55 @@ router.post('/login', (req, res) => {
 // CAMBIAR CONTRASEÑA
 // =======================
 router.post('/crear-password', async (req, res) => {
-    const { correo, password } = req.body;
 
-    console.log("📩 Datos recibidos:", correo, password);
+    // 🔥 PRIMERO declarar variables
+    const { correo, password, telefono, direccion } = req.body;
 
-    if (!correo || !password) {
+    console.log("Datos recibidos:", { correo, password, telefono, direccion });
+
+    if (!correo || !password || !telefono || !direccion) {
         return res.status(400).json({ error: "Faltan datos" });
     }
 
     try {
-        const hash = await bcrypt.hash(password, 10);
+        // 🔍 VERIFICAR SI EXISTE USUARIO
+        const checkSql = "SELECT * FROM usuarios WHERE correo = ?";
 
-        const sql = "UPDATE usuarios SET password = ? WHERE correo = ?";
-
-        db.query(sql, [hash, correo], (err, result) => {
+        db.query(checkSql, [correo], async (err, results) => {
 
             if (err) {
-                console.error("❌ ERROR SQL:", err);
-                return res.status(500).json({ error: "Error al actualizar contraseña" });
+                console.error(err);
+                return res.status(500).json({ error: "Error en consulta" });
             }
 
-            console.log("✅ Resultado:", result);
-
-            if (result.affectedRows === 0) {
-                return res.status(404).json({ error: "Usuario no encontrado" });
+            if (results.length === 0) {
+                return res.status(404).json({ error: "Usuario no existe" });
             }
 
-            res.json({ mensaje: "Contraseña actualizada correctamente 🔥" });
+            // 🔐 HASH PASSWORD
+            const hash = await bcrypt.hash(password, 10);
+
+            // 🔥 UPDATE
+            const updateSql = `
+                UPDATE usuarios 
+                SET password = ?, telefono = ?, direccion = ?
+                WHERE correo = ?
+            `;
+
+            db.query(updateSql, [hash, telefono, direccion, correo], (err, result) => {
+
+                if (err) {
+                    console.error("ERROR SQL:", err);
+                    return res.status(500).json({ error: "Error al actualizar" });
+                }
+
+                res.json({ mensaje: "Datos actualizados correctamente 🔥" });
+            });
+
         });
 
     } catch (error) {
-        console.error("❌ ERROR SERVER:", error);
+        console.error(error);
         res.status(500).json({ error: "Error en servidor" });
     }
 });

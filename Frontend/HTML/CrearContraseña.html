@@ -87,40 +87,60 @@ function guardarDatos() {
 
     const password = document.getElementById("password1").value;
     const password2 = document.getElementById("password2").value;
-    const telefono = document.getElementById("telefono").value;
-    const direccion = document.getElementById("direccion").value;
+    const telefono = document.getElementById("telefono").value.trim();
+    const direccion = document.getElementById("direccion").value.trim();
 
-    // Validar coincidencia
+    // Obtener correo desde URL
+    const params = new URLSearchParams(window.location.search);
+    const correo = params.get('correo');
+
+    console.log("Enviando:", { correo, password, telefono, direccion });
+
+    // Validar contraseña
     if (password !== password2) {
         alert("Las contraseñas no coinciden");
         return false;
     }
 
-    // Validar teléfono (solo números)
+    // Validar teléfono
     if (!/^[0-9]+$/.test(telefono)) {
         alert("El teléfono solo debe contener números");
         return false;
     }
 
-    fetch('/api/crear-password', {
+    // Validar que no venga vacío
+    if (!correo || !telefono || !direccion) {
+        alert("Faltan datos, verifica el formulario");
+        return false;
+    }
+
+    fetch('http://localhost:3000/api/crear-password', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            'Content-Type': 'application/json'
+        },
         body: JSON.stringify({
-            correo,
-            password,
-            telefono,
-            direccion
+            correo: correo,
+            password: password,
+            telefono: telefono,
+            direccion: direccion
         })
     })
     .then(res => res.json())
     .then(data => {
-        alert(data.mensaje)
-        window.location.href = '../HTML/IniciarSecion.html'
+        console.log("Respuesta:", data);
+
+        if (data.error) {
+            alert(data.error);
+        } else {
+            alert(data.mensaje);
+            window.location.href = '../HTML/IniciarSecion.html';
+        }
     })
     .catch(err => {
-        console.error(err)
-        alert("Error al guardar datos")
-    })
+        console.error("Error:", err);
+        alert("Error al guardar datos");
+    });
 
     return false;
 }
