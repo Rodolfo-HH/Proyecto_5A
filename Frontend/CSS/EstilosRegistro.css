@@ -8,76 +8,80 @@ body{
 a{
     color: #FFFFFF;
 }
-a#valC{
-    color: #0000FF;
-}
 #Contenedor{
     width: 1268px;
     background: linear-gradient(#8B0000, #FF0000);
     border-radius: 10px;
     padding: 0px;
 }
-header#uno{
-    width: 1200px;
-    height: 100px;
+header{
+    width: 1190px;
+    height: 90px;
     color: #FFFFFF;
     display: flex;
+    padding: 20px 40px;
+    align-items: center;
     justify-content: space-between;
 }
 nav ul li{
 	float: right;
 	list-style: none;
-    margin-right: -20px;
-    margin-top: 35px;
+    margin-right: 10px;
+    margin-top: 3px;
     cursor: pointer;
+}
+h1{ 
+    margin-left: 400px;
+    margin-bottom: 5px;
 }
 img#logo{
     width: 80px;
     height: 80px;
-    margin: 10px;
 }
-section#uno{
+h1{
+    margin-right: 460px;
+}
+section{
     background-color: #C0392B;
     width: 321px;
-    height: 465px;
+    height: 430px;
     margin: 10px;
-    border-radius: 10px;
     margin-left: 450px;
+    border-radius: 10px;
 }
-section#form{
+section#sec{
     background-color: #FFFFFF;
     width: 310px;
-    height: 455px;
+    height: 420px;
     margin: 4px;
     border-radius: 10px;
 }
-h1{
-    margin-top: 30px;
-}
-ul li{
-    list-style: none;
-}
-button#siguiente{
+button#continuar{
     background-color: #32CD32;
-    border: none;
-    padding: 4px 5px;
-    margin-right: 10px;
-    border-radius: 80px;
-    font-size: 15px;
-    cursor: pointer;
-    width: 300px;
+    width: 305px;
     height: 30px;
     color: #FFFFFF;
+    border:none;
+    border-radius: 80px;
 }
 legend{
     text-align: center;
 }
+h4{
+    text-align: center;
+}
+input{
+    width: 300px;
+}
+input#telefonoContacto{
+    width: 240px;
+}
+/*Estos son los botones de Google y Facebook*/
+
 p#Cont{
     text-align: center;
     color: #778899;
 }
-
-/** Esta parte es de los botones de Inicio de Sesión con Google o Facebook*/
 button#btnGoogle{
     width: 300px;
     border-color: dimgray;

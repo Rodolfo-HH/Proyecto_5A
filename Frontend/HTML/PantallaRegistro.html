@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/Frontend/CSS/EstilosRegistro.css">
+    <title>Registrate</title>
+</head>
+<body>
+    <div id="Contenedor">
+        <header>
+            <img src="/Frontend/Imagenes/logo.png" id="logo">
+            <h1>Carniceria "Mi Mary"</h1>
+            <nav>
+                <ul>
+                    <li><a href="PantallaPrincipal.html">Salir</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <section>
+        <section id="sec">
+            <form>
+                    <legend>Registrate</legend>
+                    <h4>Datos Personales</h4>
+                    <label for="nombre">Nombre/Usuario:</label><br>
+                    <input id="nombre" type="text" size="50" placeholder="Ingresa tu nombre..."><br>
+                    <label for="email">Correo electronico:</label><br>
+                    <input id="email" type="email" size="50" placeholder="correo@ejemplo.com"><br>
+                    <label for="telefonoContacto">Telefono:</label><br>
+                    <select>
+                        <option value="">Fijo</option>
+                        <option value="">Móvil</option>
+                    </select>
+                    <input id="telefonoContacto" type="tel" placeholder="p.e: (555)-540-60-70" pattern="[0-9]{3}-[0-9]{3}-[0-9]{2}-[0-9]{2}"><br>
+                    <label for="direccion">Dirección:</label><br>
+                    <input id="direccion" type="text" size="50" placeholder="Ingresa tu dirección..."> 
+                    <br>
+                    <br>
+                    <div class="botones">
+                        <button id="continuar" type="submit" onclick="validar()">Continuar</button>
+                    </div>
+                    <br>
+                    <p id="Cont">------ O continuar con ------</p>
+                    <br>
+                    <button type="submit" id="btnGoogle"><img src="/Frontend/Imagenes/Iconos/Googleicon.ico" id="ImgGo"><a href="" id="G">Continuar con Google</a></button>
+                    <br>
+                    <br>
+                    <button type="submit" id="btnFacebook"><img src="/Frontend/Imagenes/Iconos/Facebookicon.ico" id="ImgFa"> <a href="" id="F">Continuar con Facebook</a></button><br>
+                <script>
+                    function validar(){
+                        const nombre = document.getElementById("nombre").value.trim();
+                        const email = document.getElementById("email").value.trim();
+                        const telefono = document.getElementById("telefonoContacto").value.trim();
+                        const direccion = document.getElementById("direccion").value.trim();
+
+                        if(nombre === "" || email === "" || telefono === "" || direccion === ""){
+                            alert("⚠️ Por favor llena todos los campos");
+                                return; // 🚫 NO avanza
+                        }
+
+                        // Validación extra de email
+                        if(!email.includes("@")){
+                            alert("⚠️ Ingresa un correo válido");
+                                return;
+                        }
+
+                            // Si todo está bien
+                    window.location.href = "PantallaInicio.html";
+                }
+                </script>
+            </form>
+        </section>
+    </section>
+</body>
+</html>
