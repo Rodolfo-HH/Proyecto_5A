@@ -1,0 +1,327 @@
+body{
+    background-color: #F5E6CC;
+}
+*{
+    padding: 1px;
+    margin: 0;
+}
+a{
+    color: #FFFFFF;
+}
+#Contenedor{
+    width: auto;
+    background: linear-gradient(#8B0000, #FF0000);
+    border-radius: 10px 10px 0px 0px;
+    padding: 0px;
+}
+header{
+    width: 1480px;
+    height: 90px;
+    color: #FFFFFF;
+    display: flex;
+    padding: 20px 40px;
+    align-items: center;
+    justify-content: space-between;
+}
+nav section{
+	float: right;
+	list-style: none;
+    margin-right: 20px;
+    margin-top: 5px;
+    cursor: pointer;
+    width: 30px;
+}
+img#logo{
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+}
+/*Formulario de busqueda*/
+.form-busqueda{
+    display: flex;
+    align-items: center;
+    width: 500px;
+    margin-left: 550px;
+    background-color: white;
+    border-radius: 25px;
+    padding: 5px 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.form-busqueda input[type="text"]{
+    border: none;
+    outline: none;
+    padding: 8px 10px;
+    border-radius: 25px;
+    width: 300px;
+    font-family: texto_general;
+    font-size: 0.95rem;
+    color: #333;
+}
+.form-busqueda button{
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 1.1rem;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.3s ease;
+}
+.form-busqueda button:hover{
+    color: #3498DB;
+}
+img#Iconos{
+    width: 32px;
+    height: 32px;
+    margin-top: 5px;
+}
+hr{
+    background-color: #fff;
+    border: #fff;
+}
+/*Boton desplegable*/
+/* MENU LATERAL DESDE LA DERECHA */
+.overlay {
+    height:0;
+    width: 200px;
+    position: absolute;
+    z-index: 1;
+    top: 120px;
+    right: 0;            /* APARECE DESDE LA DERECHA */
+    background-color: rgb(255, 0, 0);
+    overflow-y: hidden;
+    transition: 0.5s;
+    padding-top: 10px;
+    margin-right: 5px;
+    border-radius: 0px 0px 10px 10px;
+}
+.overlay-content {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-top: 50px;
+}
+.overlay a {
+    padding: 5px;
+    font-size: 20px;
+    color: #F5E6CC;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.overlay a:hover {
+    color: #FFFFFF;
+}
+.closebtn {
+    position: absolute;
+    top: 5px;
+    right: 25px;
+    font-size: 60px;
+    cursor: pointer;
+}
+/* Ícono hamburguesa */
+.openbtn {
+    font-size: 30px;
+    cursor: pointer;
+    color: #FFFFFF;
+    margin-left: 20px;
+}   
+
+/*Secciones de productos*/
+/*Primera seccion (rectangulo uno)*/
+section#Uno{
+    background-color: #8B0000;
+    width: 320px;
+    height: 450px;
+    border-radius: 15px 15px 15px 15px;
+    margin-left: 100px;
+}
+img#Imag1{
+    margin-left: 4px;
+    width: 270px;
+    height: 198px;
+    border-radius: 10px 10px 10px 10px;
+}
+section#Dos{
+    background-color: #FFFFFF;
+    width: 280px;
+    height: 200px;
+    border-radius: 10px 10px 10px 10px;
+    margin-left: 18px;
+}
+section#Tres{
+    text-align: center;
+    background-color: #FFFFFF;
+    width: 280px;
+    height: 40px;
+    border-radius: 10px 10px 10px 10px;
+    margin-left: 18px;
+}
+button#detalle{
+    background-color: #C0392B;
+    color: #FFFFFF;
+    width: 280px;
+    height: 40px;
+    margin-left: 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+button#agregar{
+    background-color: #C0392B;
+    color: #FFFFFF;
+    width: 280px;
+    height: 40px;
+    margin-left: 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+/*Segunda Seccion (rectangulo dos)*/
+section#Cuatro{
+    background-color: #8B0000;
+    width: 320px;
+    height: 450px;
+    border-radius: 15px 15px 15px 15px;
+    margin-left: 450px;
+    margin-top: -450px;
+}
+img#Imag2{
+    margin-left: 4px;
+    width: 270px;
+    height: 198px;
+    border-radius: 10px 10px 10px 10px;
+}
+section#Cinco{
+    background-color: #FFFFFF;
+    width: 280px;
+    height: 200px;
+    border-radius: 10px 10px 10px 10px;
+    margin-left: 18px;
+}
+section#Seis{
+    text-align: center;
+    background-color: #FFFFFF;
+    width: 280px;
+    height: 40px;
+    border-radius: 10px 10px 10px 10px;
+    margin-left: 18px;
+}
+button#detalle{
+    background-color: #C0392B;
+    color: #FFFFFF;
+    width: 280px;
+    height: 40px;
+    margin-left: 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+button#agregar{
+    background-color: #C0392B;
+    color: #FFFFFF;
+    width: 280px;
+    height: 40px;
+    margin-left: 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+/*Tercera Seccion (Rectangulo tres)*/
+section#Siete{
+    background-color: #8B0000;
+    width: 320px;
+    height: 450px;
+    border-radius: 15px 15px 15px 15px;
+    margin-left: 800px;
+    margin-top: -450px;
+}
+img#Imag3{
+    margin-left: 4px;
+    width: 270px;
+    height: 198px;
+    border-radius: 10px 10px 10px 10px;
+}
+section#Ocho{
+    background-color: #FFFFFF;
+    width: 280px;
+    height: 200px;
+    border-radius: 10px 10px 10px 10px;
+    margin-left: 18px;
+}
+section#Nueve{
+    text-align: center;
+    background-color: #FFFFFF;
+    width: 280px;
+    height: 40px;
+    border-radius: 10px 10px 10px 10px;
+    margin-left: 18px;
+}
+button#detalle{
+    background-color: #C0392B;
+    color: #FFFFFF;
+    width: 280px;
+    height: 40px;
+    margin-left: 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+button#agregar{
+    background-color: #C0392B;
+    color: #FFFFFF;
+    width: 280px;
+    height: 40px;
+    margin-left: 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+/*Cuarta Seccion (Rectangulo cuatro)*/
+section#Diez{
+    background-color: #8B0000;
+    width: 320px;
+    height: 450px;
+    border-radius: 15px 15px 15px 15px;
+    margin-left: 1150px;
+    margin-top: -450px;
+}
+img#Imag4{
+    margin-left: 4px;
+    width: 270px;
+    height: 198px;
+    border-radius: 10px 10px 10px 10px;
+}
+section#Once{
+    background-color: #FFFFFF;
+    width: 280px;
+    height: 200px;
+    margin-left: 18px;
+    border-radius: 10px 10px 10px 10px;
+}
+section#Doce{
+    text-align: center;
+    background-color: #FFFFFF;
+    width: 280px;
+    height: 40px;
+    border-radius: 10px 10px 10px 10px;
+    margin-left: 18px;
+}
+button#detalle{
+    background-color: #C0392B;
+    color: #FFFFFF;
+    width: 280px;
+    height: 40px;
+    margin-left: 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+button#agregar{
+    background-color: #C0392B;
+    color: #FFFFFF;
+    width: 280px;
+    height: 40px;
+    margin-left: 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
