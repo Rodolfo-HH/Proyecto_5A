@@ -10,13 +10,13 @@ a{
     color: #FFFFFF;
 }
 #Contenedor{
-    width: 1268px;
+    width: auto;
     background: linear-gradient(#8B0000, #FF0000);
     border-radius: 10px;
     padding: 0px;
 }
 header{
-    width: 1200px;
+    width: 1480px;
     height: 90px;
     color: #FFFFFF;
     display: flex;
@@ -41,6 +41,7 @@ section#uno{
     width: 450px;
     height: 250px;
     margin: 10px;
+    margin-left: 200px;
     border-radius: 10px;
 }
 section#informacion{
@@ -57,7 +58,7 @@ section#dos{
     height: 250px;
     margin: 10px;
     border-radius: 10px;
-    margin-left: 810px;
+    margin-left: 860px;
     margin-right: -600px;
     margin-top: -262px;
 }
@@ -79,7 +80,7 @@ footer {
   justify-content: space-around;
   align-items: center;
   padding: 15px;
-  margin-top: 130px;
+  margin-top: 230px;
   border-radius: 10px;
 }
 img#imagen1{

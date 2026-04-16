@@ -48,7 +48,7 @@ section{
     background-color: #C0392B;
     width: 340px;
     height: auto;
-    margin: 5px auto;
+    margin: 35px auto;
     border-radius: 10px;
     padding: 3px;
 }
@@ -78,14 +78,14 @@ h4{
 }
 label{
     font-size: 14px;
-    margin-bottom: 0;
+    margin-bottom: 4;
     line-height: 1;
     display: block;
 }
 input{
     width: 100%;
-    margin-top: 0px;
-    margin-bottom: 0px;
+    margin-top: 4px;
+    margin-bottom: 4px;
     padding: 4px;
     box-sizing: border-box;
     height: 28px;
@@ -115,7 +115,7 @@ button#btnGoogle{
     width: 100%;
     border: 1px solid dimgray;
     border-radius: 30px;
-    margin-bottom: 4px;
+    margin-bottom: 8px;
     padding: 5px;
     cursor: pointer;
     height: 28px;

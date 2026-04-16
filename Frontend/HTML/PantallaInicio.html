@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pantalla_Inicial_v2</title>
-    <link rel="stylesheet" href="/Frontend/CSS/EstilosP_v2.css">
+    <link rel="stylesheet" href="../css/EstilosP_v2.css">
 </head>
 <body>
     <div id="Contenedor">
         <header>
-            <img src="/Frontend/Imagenes/logo.png" id="logo">
+            <img src="../Imagenes/logo.png" id="logo">
             <form class="form-busqueda">
                 <input type="text" placeholder="Buscar...">
                 <button type="submit"><i class="fas fa-search"></i></button>
@@ -19,12 +19,13 @@
         <div id="myNav" class="overlay">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <div class="oevrlay-content"><br>
-                <a href="Productos.html"><img src="/Frontend/Imagenes/Iconos/Product.ico" id="Iconos">Productos</a><br><br><hr>
-                <a href="Ofertas.html"><img src="/Frontend/Imagenes/Iconos/Oferta.ico" id="Iconos">Ofertas</a><br><br><hr>
-                <a href="Contactos.html"><img src="/Frontend/Imagenes/Iconos/Contact.ico" id="Iconos">Contacto</a><br><br><hr>
-                <a href="PantallaPrincipalv1.html"><img src="/Frontend/Imagenes/Iconos/Exit.ico" id="Iconos">Cerrar Sesión</a><br><br><hr>
+                <a href="Productos.html"><img src="../Imagenes/Iconos/Product.ico" id="Iconos">Productos</a><br><br><hr>
+                <a href="Ofertas.html"><img src="../Imagenes/Iconos/Oferta.ico" id="Iconos">Ofertas</a><br><br><hr>
+                <a href="Contactos.html"><img src="../Imagenes/Iconos/Contact.ico" id="Iconos">Contacto</a><br><br><hr>
+                <a href="PantallaPrincipalv1.html" id="linkCerrarSesion"><img src="../Imagenes/Iconos/Exit.ico" id="Iconos">Cerrar Sesión</a><br><br><hr>
             </div>
         </div>
+    </div>
         
         <script>
             function openNav() {
@@ -36,12 +37,15 @@
             }
         </script>
 
+        <br>
+        <br>
+
         <section id="Seccion0">
             <section id="Seccion1">
-                <img src="/Frontend/Imagenes/banner1.png" id="banner1">
+                <img src="../Imagenes/banner1.png" id="banner1">
             </section>
             <section id="Seccion2">
-                <img src="/Frontend/Imagenes/banner2.jpeg" id="banner2">
+                <img src="../Imagenes/banner2.jpeg" id="banner2">
             </section>
             <section id="Texto">
                 <p>"Aprobecha nuestras ofertas del día:"<br>
@@ -66,11 +70,34 @@
             <div class="contacto">WhatsApp: <span>XXX XXX XX XX</span></div>
             <div class="contacto">Facebook: <span>Texto Texto Texto</span></div>
         </footer>
+        
         <script>
+            // Verificar usuario logueado
+            const usuario = JSON.parse(localStorage.getItem('usuario'));
+            
+            if (usuario) {
+                console.log('Usuario logueado:', usuario.nombre);
+                // Cambiar "Cerrar Sesión" por el nombre del usuario
+                const linkCerrar = document.getElementById('linkCerrarSesion');
+                linkCerrar.innerHTML = `<img src="../Imagenes/Iconos/Exit.ico" id="Iconos">${usuario.nombre} (Salir)`;
+            }
+            
+            // Manejar cierre de sesión
+            document.getElementById('linkCerrarSesion').addEventListener('click', function(e) {
+                localStorage.removeItem('usuario');
+                // No prevenir el comportamiento por defecto, dejar que vaya a PantallaPrincipalv1.html
+            });
+            
             function siguiente1(){
                 window.location.href = "Productos.html"
             }
             function siguiente2(){
+                // Verificar si está logueado antes de hacer pedido
+                if (!usuario) {
+                    alert('Debes iniciar sesión para hacer un pedido');
+                    window.location.href = "IniciarSecion.html";
+                    return;
+                }
                 window.location.href = "Pedidos.html"
             }
         </script>
