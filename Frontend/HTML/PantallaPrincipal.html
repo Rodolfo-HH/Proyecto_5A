@@ -5,36 +5,41 @@
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Pantalla Principal</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
+
     <link rel='stylesheet' type='text/css' media='screen' href='../css/EstilosP_Principal.css'>
+    <!-- LEAFLET CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
 </head>
+
 <body>
     <div id="Contenedor">
         <header>
             <img src="../Imagenes/logo.png" id="logo">
-                <h1 align="center">Carniceria "Mi Mary"</h1>
+            <h1 align="center">Carniceria "Mi Mary"</h1>
             <nav>
-            <ul>
-                <li><a href="IniciarSecion.html">Iniciar Sesion</a></li>
-                <li><a href="PantallaRegistro.html">Registrarse</a></li>
-            </ul>
+                <ul>
+                    <li><a href="IniciarSecion.html">Iniciar Sesion</a></li>
+                    <li><a href="PantallaRegistro.html">Registrarse</a></li>
+                </ul>
             </nav>
-        </div>
-    </header>
+        </header>
+    </div>
 
-    <br>
-    <br>
+    <br><br>
 
     <section id="uno">
         <section id="informacion">
             <h2>Informacion de la carniceria</h2>
-            <p align="justify">En Carnicería "Mi Mary" nos especializamos en ofrecer<br>
+            <p align="justify">
+                En Carnicería "Mi Mary" nos especializamos en ofrecer<br>
                 los mejores cortes de res y cerdo, siempre fresco y con la<br>
                 mejor y mayor calidad. Contamos con atención personalizada,<br>
                 cortes al gusto y precios que se ajustan a tu bolsillo.<br>
                 Ven y descubre por que somos la preferencia de las familias<br>
-                de la zona.<br>
-                </p><br>
-                <p>"¡¡¡Calidad, sabor y confianza en cada visita!!!"</p>
+                de la zona.
+            </p><br>
+            <p>"¡¡¡Calidad, sabor y confianza en cada visita!!!"</p>
         </section>
     </section>
     
@@ -44,10 +49,35 @@
         </section>
     </section>
 
+    <!-- 🔥 MAPA -->
+    <section id="mapa">
+        <h2>Ubicación</h2>
+        <div id="map"></div>
+    </section>
+
     <footer>
         <div class="contacto">Teléfono: <span>764 764 3868</span></div>
         <div class="contacto">WhatsApp: <span>764 117 85 68</span></div>
         <div class="contacto">Facebook: <span>Carniceria "Mi Mary"</span></div>
-  </footer>
+    </footer>
+
+    <!-- LEAFLET JS -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <!-- SCRIPT DEL MAPA -->
+    <script>
+        const lat = 19.0414;  // Puebla (puedes cambiarlo)
+        const lng = -98.2063;
+
+        const map = L.map('map').setView([lat, lng], 15);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        L.marker([lat, lng]).addTo(map)
+            .bindPopup("Carnicería 'Mi Mary' 📍")
+            .openPopup();
+    </script>
 </body>
 </html>

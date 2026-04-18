@@ -16,7 +16,7 @@ a{
     padding: 0px;
 }
 header{
-    width: 1480px;
+    width: auto;
     height: 90px;
     color: #FFFFFF;
     display: flex;
@@ -87,3 +87,19 @@ img#imagen1{
     width: 420px;
     height: 220px;
 }
+ /* ESTILO DEL MAPA */
+        #mapa {
+            width: 80%;
+            margin: 30px auto;
+            background: white;
+            padding: 15px;
+            border: 4px solid #8B0000;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        #map {
+            width: 100%;
+            height: 350px;
+            border-radius: 10px;
+        }
