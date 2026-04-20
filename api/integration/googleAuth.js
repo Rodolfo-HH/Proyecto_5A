@@ -1,26 +1,30 @@
-import express from 'express'
-import passport from '../../Backend/config/passport.js'
+const express = require('express');
+const passport = require('../../Backend/config/passport');
 
-const router = express.Router()
+const router = express.Router();
 
-// 🔹 Iniciar con Google
+// LOGIN GOOGLE
 router.get('/google',
-    passport.authenticate('google', {
-        scope: ['profile', 'email']
-    })
-)
+    passport.authenticate('google', { scope: ['profile', 'email'] })
+);
 
-// 🔹 Callback de Google
+// CALLBACK
 router.get('/google/callback',
     passport.authenticate('google', {
-        failureRedirect: '/login'
+        failureRedirect: '/HTML/IniciarSesion.html'
     }),
     (req, res) => {
-        console.log('Usuario autenticado:', req.user)
 
-        // 👉 puedes cambiar esto a tu HTML real
-        res.redirect('../HTML/PantallaInicio.html')
+        const user = req.user;
+
+        // 👉 SI NO TIENE PASSWORD
+        if (user.necesitaPassword) {
+            return res.redirect(`/HTML/CrearContraseña.html?correo=${user.correo}`);
+        }
+
+        // 👉 SI YA TIENE
+        res.redirect('/HTML/PantallaPrincipal.html');
     }
-)
+);
 
-export default router
+module.exports = router;

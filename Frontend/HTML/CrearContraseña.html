@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../CSS/EstilosCrearContra.css">
+</head>
+<body>
+    <div id="Contenedor">
+        <header>
+            <img src="../Imagenes/logo.png" id="logo">
+                <h1 align="center">Carniceria "Mi Mary"</h1>
+            <nav>
+            <ul>
+                <li><a href="../HTML/IniciarSesion.html">Iniciar Sesion</a></li>
+            </ul>
+            </nav>
+        </div>
+    </header>
+    <section>
+        <section id="uno">
+            <form onsubmit="return irPagina()">
+                    <h2>Crear contraseña:</h2>
+                    <div class="req"><input type="checkbox" id="Check1" disabled>Minimo 8 caracteres</div>
+                    <div class="req"><input type="checkbox" id="Check2" disabled>Una mayúscula</div>
+                    <div class="req"><input type="checkbox" id="Check3" disabled>Un número</div>
+                    <div class="req"><input type="checkbox" id="Check4" disabled>Un símbolo(!@#$%& etc.)</div>
+
+                    <input type="password" id="password1" placeholder="Crear contraseña" oninput="validar()" required>
+                    <br>
+                    <br>
+                    <input type="password" id="password2" placeholder="Verificar contraseña" oninput="validar()" required>
+                    <br>
+                    <br>
+                    <button type="submit" id="siguiente" onclick="validar()">Siguiente</button>
+                    <p id="mensaje" style="color: #FF0000"></p>
+
+                    <script>
+                        function validar() {
+                            const pass = document.getElementById("password1").value;
+                            const password2 = document.getElementById("password2").value;
+
+                            document.getElementById("Check1").checked = pass.length >=8;
+                            document.getElementById("Check2").checked = /[A-Z]/.test(pass);
+                            document.getElementById("Check3").checked = /[0-9]/.test(pass);
+                            document.getElementById("Check4").checked = /[^A-Za-z0-9]/.test(pass);
+
+                            const coinciden = pass = password2;document.getElementById("mensaje").innerText = 
+                            (password2 !== " " && !coinciden) ? "La contraseña no coincide" :
+                            (coinciden && pass.length > 0) ? "Las contraseñas son correctas" : "";
+                            
+                            document.getElementById("mensaje").style.color = coinciden ? "green" : "red";
+
+                            const todoListo =
+                            document.getElementById("Check1").checked &&
+                            document.getElementById("Check2").checked &&
+                            document.getElementById("Check3").checked &&
+                            document.getElementById("Check4").checked &&
+                            coinciden;
+
+                            document.getElementById("button").disabled = !todoListo;
+                        }
+                        function irPagina(){
+                            window.location.href = "../html/IniciarSecion.html"
+                            return false;
+                        }
+                    </script>
+            </form>
+        </section>
+    </section>
+</body>
+</html>
