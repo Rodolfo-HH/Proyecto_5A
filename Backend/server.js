@@ -24,6 +24,23 @@ app.get('/api', (req, res) => {
     res.json({ mensaje: 'API Carniceria Mi Mary funcionando' });
 });
 
+// IMPORTANTE: importar ruta de integration
+import googleAuth from '../api/integration/googleAuth.js'
+
+const app = express()
+
+app.use(session({
+    secret: 'secreto',
+    resave: false,
+    saveUninitialized: false
+}))
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+// USAR RUTA GOOGLE
+app.use('/auth', googleAuth)
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);

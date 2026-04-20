@@ -69,3 +69,57 @@ exports.login = async (req, res) => {
         }
     );
 };
+
+// GOOGLE LOGIN / REGISTER
+exports.googleAuth = (perfil) => {
+    return new Promise((resolve, reject) => {
+
+        const nombre = perfil.displayName
+        const correo = perfil.emails[0].value
+
+        db.query(
+            'SELECT u.*, r.nombre_rol FROM usuarios u JOIN roles r ON u.id_rol = r.id_rol WHERE u.correo = ?',
+            [correo],
+            (err, results) => {
+
+                if (err) return reject(err)
+
+                // 👉 SI NO EXISTE → REGISTRAR
+                if (results.length === 0) {
+
+                    db.query(
+                        'INSERT INTO usuarios (nombre, correo, password, telefono, direccion, id_rol) VALUES (?, ?, ?, ?, ?, 3)',
+                        [
+                            nombre,
+                            correo,
+                            null,
+                            null,
+                            null
+                        ],
+                        (err, result) => {
+                            if (err) return reject(err)
+
+                            resolve({
+                                id_usuario: result.insertId,
+                                nombre,
+                                correo,
+                                rol: 'cliente'
+                            })
+                        }
+                    )
+
+                } else {
+                    // 👉 LOGIN
+                    const usuario = results[0]
+
+                    resolve({
+                        id_usuario: usuario.id_usuario,
+                        nombre: usuario.nombre,
+                        correo: usuario.correo,
+                        rol: usuario.nombre_rol
+                    })
+                }
+            }
+        )
+    })
+}
