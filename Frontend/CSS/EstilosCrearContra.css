@@ -1,0 +1,82 @@
+body{
+    background-color: #F5E6CC;
+}
+*{
+    padding: 1px;
+    margin: 0;
+}
+a{
+    color: #FFFFFF;
+}
+#Contenedor{
+    width: auto;
+    background: linear-gradient(#8B0000, #FF0000);
+    border-radius: 10px;
+    padding: 0px;
+}
+header{
+    width: 1480px;
+    height: 90px;
+    color: #FFFFFF;
+    display: flex;
+    padding: 20px 40px;
+    align-items: center;
+    justify-content: space-between;
+}
+nav ul li{
+	float: right;
+	list-style: none;
+    margin-right: 20px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+img#logo{
+    width: 80px;
+    height: 80px;
+}
+section{
+    background-color: #C0392B;
+    width: 225px;
+    height: 272px;
+    margin: 10px;
+    border-radius: 10px;
+    margin-left: 650px;
+}
+section#uno{
+    background-color: #FFFFFF;
+    width: 215px;
+    height: 260px;
+    margin: 4px;
+    border-radius: 10px;
+}
+fieldset{
+    border-radius: 10px;
+}
+
+/*Estilos para botones e inputs*/
+
+.req{
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+input[type="password"]{
+    width: 200px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #000;
+}
+input[type="checkbox"]{
+    width: 20px;
+    accent-color: red;
+}
+button#siguiente{
+    width: 212px;
+    padding: 5px;
+    background-color: #0FFF00;
+    color: white;
+    border: none;
+    border-radius: 80px;
+    cursor: pointer;
+    align-items: center;
+}
