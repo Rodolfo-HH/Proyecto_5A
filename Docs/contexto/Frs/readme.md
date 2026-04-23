@@ -25,6 +25,7 @@
 >| - Backend <br>
 >| - **Documentation** <br>
 >| - BRs <br>
+>|- FRs <br>
 > &nbsp;&nbsp;|- **FRs**<br>
 >| - Presentacion <br>
 >| - RNFs <br>
