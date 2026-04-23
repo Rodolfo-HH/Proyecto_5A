@@ -132,7 +132,7 @@ Finalmente, el desarrollo de esta aplicación web pretende contribuir a la moder
 
 ### Presentación
 
-La presentacion se encuentra en la Carpeta de Documentation.
+La presentacion se encuentra en la Carpeta de Docs -> presentation -> readme.md 
 
 ### Conclusiones 
 
