@@ -1,5 +1,6 @@
 body{
     background-color: #F5E6CC;
+    margin: 0;
 }
 *{
     padding: 1px;
@@ -12,13 +13,13 @@ a#valC{
     color: #0000FF;
 }
 #Contenedor{
-    width: 1268px;
+    width: auto;
     background: linear-gradient(#8B0000, #FF0000);
     border-radius: 10px;
     padding: 0px;
 }
 header#uno{
-    width: 1200px;
+    width: 1480px;
     height: 100px;
     color: #FFFFFF;
     display: flex;
@@ -40,9 +41,10 @@ section#uno{
     background-color: #C0392B;
     width: 321px;
     height: 465px;
-    margin: 10px;
-    border-radius: 10px;
-    margin-left: 450px;
+    margin: 35px auto;
+    display: block;
+    border-radius: 10px 10px 10px 10px;
+    margin-left: 600px;
 }
 section#form{
     background-color: #FFFFFF;
@@ -93,4 +95,31 @@ a#G{
 }
 a#F{
     color: #000000;
+}
+#toast {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #333;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-weight: bold;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.4s ease;
+    z-index: 9999;
+}
+
+#toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#toast.success {
+    background-color: #28a745;
+}
+
+#toast.error {
+    background-color: #dc3545;
 }
