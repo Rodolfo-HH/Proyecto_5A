@@ -1,29 +1,26 @@
 const express = require('express');
+const router = express.Router();
 const passport = require('../../Backend/config/passport');
 
-const router = express.Router();
-
-// LOGIN GOOGLE
+// 🔥 INICIAR LOGIN
 router.get('/google',
     passport.authenticate('google', { scope: ['profile', 'email'] })
 );
 
-// CALLBACK
+// 🔥 CALLBACK
 router.get('/google/callback',
-    passport.authenticate('google', {
-        failureRedirect: '/HTML/IniciarSesion.html'
-    }),
+    passport.authenticate('google', { failureRedirect: '/HTML/IniciarSecion.html' }),
     (req, res) => {
 
-        const user = req.user;
-
-        // 👉 SI NO TIENE PASSWORD
-        if (user.necesitaPassword) {
-            return res.redirect(`/HTML/CrearContraseña.html?correo=${user.correo}`);
+        if (!req.user) {
+            return res.redirect('/HTML/IniciarSecion.html');
         }
 
-        // 👉 SI YA TIENE
-        res.redirect('/HTML/PantallaPrincipal.html');
+        if (req.user.necesitaPassword) {
+            return res.redirect(`/HTML/CrearContraseña.html?correo=${req.user.correo}`);
+        }
+
+        res.redirect('/HTML/PantallaInicio.html'); // 🔥 TU PANTALLA FINAL
     }
 );
 

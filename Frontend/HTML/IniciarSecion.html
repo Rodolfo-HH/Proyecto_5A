@@ -48,14 +48,14 @@
                 <br>
                 
                 <button type="button" id="btnGoogle">
-                    <img src="../Imagenes/Iconos/" id="ImgGo">
+                    <img src="../Imagenes/Iconos/Google.png" id="ImgGo">
                     <a href="http://localhost:3000/auth/google" id="G">Continuar con Google</a>
                 </button>
                 <br><br>
                 
                 <button type="button" id="btnFacebook">
-                    <img src="../Imagenes/Iconos/Facebookicon.ico" id="ImgFa"> 
-                    <a href="" id="F">Continuar con Facebook</a>
+                    <img src="../Imagenes/Iconos/" id="ImgFa"> 
+                    <a href="/auth/github" id="F">Continuar con GitHub</a>
                 </button><br>
             </form>
         </section>
@@ -65,7 +65,7 @@
     <div id="toast"></div>
 
     <script>
-        const API_URL = 'http://localhost:3000';
+        const API_URL = 'http://localhost:4000';
 
         function mostrarToast(mensaje, tipo) {
             const toast = document.getElementById('toast');
@@ -112,7 +112,7 @@
                 const resultado = await respuesta.json();
                 
                 if (respuesta.ok) {
-                    mostrarToast('✅ Bienvenido ' + resultado.usuario.nombre, 'success');
+                    mostrarToast(' Bienvenido ' + resultado.usuario.nombre, 'success');
                     
                     localStorage.setItem('usuario', JSON.stringify(resultado.usuario));
                     
@@ -129,6 +129,7 @@
                 console.error('Error:', error);
             }
         });
+        
     </script>
 </body>
 </html>

@@ -36,16 +36,16 @@ img#logo{
 }
 section{
     background-color: #C0392B;
-    width: 225px;
-    height: 272px;
-    margin: 10px;
+    width: 325px;
+    height: 372px;
+    margin: 50px;
     border-radius: 10px;
     margin-left: 650px;
 }
 section#uno{
     background-color: #FFFFFF;
-    width: 215px;
-    height: 260px;
+    width: 315px;
+    height: 360px;
     margin: 4px;
     border-radius: 10px;
 }

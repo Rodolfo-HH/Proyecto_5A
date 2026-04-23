@@ -7,9 +7,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1'>
 
     <link rel='stylesheet' type='text/css' media='screen' href='../css/EstilosP_Principal.css'>
-    <!-- LEAFLET CSS -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
-
 </head>
 
 <body>
@@ -18,9 +16,8 @@
             <img src="../Imagenes/logo.png" id="logo">
             <h1 align="center">Carniceria "Mi Mary"</h1>
             <nav>
-                <ul>
-                    <li><a href="IniciarSecion.html">Iniciar Sesion</a></li>
-                    <li><a href="PantallaRegistro.html">Registrarse</a></li>
+                <ul id="menu">
+                    <!-- Se llena dinámicamente -->
                 </ul>
             </nav>
         </header>
@@ -49,7 +46,6 @@
         </section>
     </section>
 
-    <!-- 🔥 MAPA -->
     <section id="mapa">
         <h2>Ubicación</h2>
         <div id="map"></div>
@@ -61,12 +57,11 @@
         <div class="contacto">Facebook: <span>Carniceria "Mi Mary"</span></div>
     </footer>
 
-    <!-- LEAFLET JS -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-    <!-- SCRIPT DEL MAPA -->
     <script>
-        const lat = 19.0414;  // Puebla (puedes cambiarlo)
+        // MAPA
+        const lat = 19.0414;
         const lng = -98.2063;
 
         const map = L.map('map').setView([lat, lng], 15);
@@ -78,6 +73,33 @@
         L.marker([lat, lng]).addTo(map)
             .bindPopup("Carnicería 'Mi Mary' 📍")
             .openPopup();
+
+
+        // 🔥 VERIFICAR SESIÓN
+        fetch('http://localhost:3000/api/usuario', {
+            credentials: 'include'
+        })
+        .then(res => res.json())
+        .then(data => {
+
+            const nav = document.getElementById("menu");
+
+            if (data.logueado) {
+                nav.innerHTML = `
+                    <li>👋 ${data.usuario.nombre}</li>
+                    <li><a href="http://localhost:3000/logout">Cerrar sesión</a></li>
+                `;
+            } else {
+                nav.innerHTML = `
+                    <li><a href="/html/IniciarSecion.html">Iniciar Sesión</a></li>
+                    <li><a href="/html/PantallaRegistro.html">Registrarse</a></li>
+                `;
+            }
+
+        })
+        .catch(error => {
+            console.error("Error obteniendo usuario:", error);
+        });
     </script>
 </body>
 </html>

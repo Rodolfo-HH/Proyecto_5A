@@ -1,15 +1,14 @@
-const authController = require('../../Backend/controllers/authController.js');
+const express = require('express');
+const router = express.Router();
+const authController = require('../../Backend/controllers/authController');
 
-function registrarRutas(app) {
+// REGISTRO
+router.post('/registro', authController.registro);
 
-    // 🔐 REGISTRO
-    app.post('/api/own/auth/registro', authController.registro);
-    
-    // 🔐 LOGIN
-    app.post('/api/own/auth/login', authController.login);
+// LOGIN
+router.post('/login', authController.login);
 
-    // 🔐 CREAR PASSWORD (GOOGLE)
-    app.post('/api/crear-password', authController.crearPassword);
-}
+// CREAR PASSWORD
+router.post('/crear-password', authController.crearPassword);
 
-module.exports = registrarRutas;
+module.exports = router;

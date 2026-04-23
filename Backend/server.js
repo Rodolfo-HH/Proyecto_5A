@@ -1,13 +1,17 @@
 require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
 const path = require('path');
+const express = require('express');
 const session = require('express-session');
 const passport = require('./config/passport');
+const cors = require('cors');
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5500',
+    credentials: true
+}));
+
 app.use(express.json());
 
 app.use(session({
@@ -19,22 +23,36 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// FRONTEND
-app.use(express.static(path.join(__dirname, '../Frontend')));
-
-// RUTAS
-const registrarRutasAuth = require('../api/own/auth');
-registrarRutasAuth(app);
-
+// RUTAS AUTH (Google/GitHub)
 const googleAuth = require('../api/integration/googleAuth');
-app.use('/auth', googleAuth);
+const githubAuth = require('../api/integration/githubAuth');
 
-// INICIO
-app.get('/', (req, res) => {
-    res.redirect('/HTML/PantallaPrincipal.html');
+app.use('/auth', googleAuth);
+app.use('/auth', githubAuth);
+
+// RUTA PARA SABER SI ESTÁ LOGUEADO
+app.get('/api/usuario', (req, res) => {
+    if (req.user) {
+        res.json({ logueado: true, usuario: req.user });
+    } else {
+        res.json({ logueado: false });
+    }
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
+// LOGOUT
+app.get('/logout', (req, res) => {
+    req.logout(() => {
+        res.redirect('http://localhost:5500/HTML/PantallaInicio.html');
+    });
+});
+
+// Servir frontend
+app.use(express.static(path.join(__dirname, '../Frontend')));
+
+app.listen(3000, () => {
+    console.log('Backend en http://localhost:3000');
+});
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, '../Frontend/html/PantallaPrincipal.html'));
 });

@@ -111,7 +111,7 @@ exports.googleAuth = (perfil) => {
                         nombre: usuario.nombre,
                         correo: usuario.correo,
                         rol: usuario.nombre_rol,
-                        necesitaPassword: usuario.password === null
+                        necesitaPassword: !usuario.password
                     });
                 }
             }
@@ -122,22 +122,54 @@ exports.googleAuth = (perfil) => {
 // CREAR PASSWORD
 exports.crearPassword = async (req, res) => {
 
-    const { correo, password } = req.body;
+    const { correo, password, telefono, direccion } = req.body;
 
     if (!correo || !password) {
-        return res.status(400).json({ error: 'Datos incompletos' });
+        return res.status(400).json({ error: 'Correo y contraseña son obligatorios' });
     }
 
-    const { hashPassword } = require('../utils/hash');
     const hashed = await hashPassword(password);
 
-    db.query(
-        'UPDATE usuarios SET password = ? WHERE correo = ?',
-        [hashed, correo],
-        (err) => {
-            if (err) return res.status(500).json({ error: 'Error al guardar contraseña' });
+    // 🔥 CASO 1: VIENE TODO (registro Google)
+    if (telefono && direccion) {
 
-            res.json({ mensaje: 'Contraseña creada correctamente' });
-        }
-    );
+        db.query(
+            'UPDATE usuarios SET password = ?, telefono = ?, direccion = ? WHERE correo = ?',
+            [hashed, telefono, direccion, correo],
+            (err, result) => {
+
+                if (err) {
+                    console.error(err);
+                    return res.status(500).json({ error: 'Error al guardar datos' });
+                }
+
+                if (result.affectedRows === 0) {
+                    return res.status(404).json({ error: 'Usuario no encontrado' });
+                }
+
+                return res.json({ mensaje: 'Registro completado correctamente' });
+            }
+        );
+
+    } else {
+        // 🔥 CASO 2: SOLO CAMBIO DE PASSWORD
+
+        db.query(
+            'UPDATE usuarios SET password = ? WHERE correo = ?',
+            [hashed, correo],
+            (err, result) => {
+
+                if (err) {
+                    console.error(err);
+                    return res.status(500).json({ error: 'Error al actualizar contraseña' });
+                }
+
+                if (result.affectedRows === 0) {
+                    return res.status(404).json({ error: 'Usuario no encontrado' });
+                }
+
+                return res.json({ mensaje: 'Contraseña actualizada correctamente' });
+            }
+        );
+    }
 };

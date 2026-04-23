@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validar Contraseña</title>
+    <link rel="stylesheet" href="../css/EstilosValContra.css">
+</head>
+<body>
+
+<div id="Contenedor">
+    <header>
+        <img src="../Imagenes/logo.png" id="logo">
+        <h1 align="center">Carniceria "Mi Mary"</h1>
+    </header>
+</div>
+
+<section id="sect">
+    <section id="sect1">
+
+        <form onsubmit="return cambiarPassword()">
+
+            <br>
+
+            <h3>Correo</h3>
+            <input type="email" id="correo" placeholder="Tu correo..." required>
+
+            <br><br>
+
+            <h3>Nueva contraseña</h3>
+            <input type="password" id="pass" placeholder="Nueva contraseña..." required>
+
+            <br><br>
+
+            <h3>Confirmar contraseña</h3>
+            <input type="password" id="val-pass" placeholder="Confirmar contraseña..." required>
+
+            <p id="mensaje"></p>
+
+            <br>
+            <button type="submit">Continuar</button>
+
+        </form>
+
+    </section>
+</section>
+
+<script>
+function cambiarPassword() {
+
+    const correo = document.getElementById("correo").value;
+    const pass = document.getElementById("pass").value;
+    const valPass = document.getElementById("val-pass").value;
+    const mensaje = document.getElementById("mensaje");
+
+    // VALIDAR QUE COINCIDAN
+    if (pass !== valPass) {
+        mensaje.textContent = "La contraseña no coincide";
+        mensaje.style.color = "red";
+
+        setTimeout(() => {
+            mensaje.textContent = "";
+        }, 3000);
+
+        return false;
+    }
+
+    mensaje.textContent = "Contraseñas correctas";
+    mensaje.style.color = "green";
+
+    // ENVIAR AL BACKEND
+    fetch('/api/crear-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            correo: correo,
+            password: pass
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
+
+        alert(data.mensaje);
+
+        // REDIRECCIÓN CORRECTA (ojo con html en minúscula)
+        window.location.href = '/html/IniciarSecion.html';
+
+    })
+    .catch(err => {
+        console.error(err);
+        alert("Error al actualizar contraseña");
+    });
+
+    return false;
+}
+</script>
+
+</body>
+</html>
