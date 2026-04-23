@@ -90,49 +90,6 @@ Finalmente, el desarrollo de esta aplicación web pretende contribuir a la moder
 
 <img src="Frontend/Imagenes/Diagrama.jpg" align="center" widht="50%">
 
-## Sketches (2 Imagenes) con la URL del figma
-
-| https://www.figma.com/design/5TTR0lQmOuuWCCWujjaLZk/Proyecto-APPWEB---Carnny?node-id=203-392&t=kOQ9B1lPt5bf91IK-1 |
-
-<img src="Frontend/Imagenes/Sketch1.png" align="center" widht="50%"><br>
-
-<img src="Frontend/Imagenes/Sketch2.png" align="center" widht="50%">
-
-## Wireframes (2 Imagenes)
-
-<img src="Frontend/Imagenes/Wireframe1.png" align="center" widht="50%"><br>
-
-<img src="Frontend/Imagenes/Wireframe2.png" align="center" widht="50%">
-
-## Mockups (2 Imagenes)
-
-<img src="Frontend/Imagenes/Mockup1.png" align="center" widht="50%"><br>
-
-<img src="Frontend/Imagenes/Mockup2.png" align="center" widht="50%">
-
-## Prototipo (2 Imagenes)
-| https://www.figma.com/proto/5TTR0lQmOuuWCCWujjaLZk/Proyecto-APPWEB---Carnny?page-id=203%3A392&node-id=447-25&viewport=415%2C207%2C0.03&t=nwplnLg3s0IhPHyY-1&scaling=min-zoom&content-scaling=fixed&starting-point-node-id=447%3A25 |
-
-
-<img src="Frontend/Imagenes/Prototipo1.png" align="center" widht="50%"><br>
-
-<img src="Frontend/Imagenes/Prototipo2.png" align="center" widht="50%">
-
-### Prototipo Programado
-
-<img src="Frontend/Imagenes/ProtProgram1.png" align="center" widht="50%"><br>
-
-<img src="Frontend/Imagenes/ProtProgram2.png" align="center" widht="50%"><br>
-
-<img src="Frontend/Imagenes/ProtProgram3.png" align="center" widht="50%"><br>
-
-<img src="Frontend/Imagenes/ProtProgram4.png" align="center" widht="50%"><br>
-
-<img src="Frontend/Imagenes/ProtProgram5.png" align="center" widht="50%">
-
-### Presentación
-
-La presentacion se encuentra en la Carpeta de Documentation.
 
 ### Conclusiones 
 
