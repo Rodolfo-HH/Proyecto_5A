@@ -4,11 +4,13 @@ const express = require('express');
 const session = require('express-session');
 const passport = require('./config/passport');
 const cors = require('cors');
+const Stripe = require('stripe');
+const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
 
 const app = express();
 
 app.use(cors({
-    origin: 'http://localhost:5500',
+    origin: ['http://localhost:5500', 'http://localhost:3000'],
     credentials: true
 }));
 
@@ -44,6 +46,37 @@ app.get('/logout', (req, res) => {
     req.logout(() => {
         res.redirect('http://localhost:5500/HTML/PantallaInicio.html');
     });
+});
+
+app.post('/api/pago/crear-sesion', async (req, res) => {
+    try {
+
+        const { nombre, precio } = req.body;
+
+        const precioNumero = Number(precio);
+
+        const session = await stripe.checkout.sessions.create({
+            payment_method_types: ['card'],
+            line_items: [{
+                price_data: {
+                    currency: 'mxn',
+                    product_data: { name: nombre },
+                    unit_amount: Math.round(precioNumero * 100)
+                },
+                quantity: 1
+            }],
+            mode: 'payment',
+
+            success_url: 'http://localhost:3000/html/compraExitosa.html',
+            cancel_url: 'http://localhost:3000/html/Productos.html'
+        });
+
+        res.json({ url: session.url });
+
+    } catch (error) { // 🔥 AQUÍ ESTÁ LA CLAVE
+        console.error("ERROR STRIPE:", error);
+        res.status(500).json({ error: 'Error en pago' });
+    }
 });
 
 // Servir frontend

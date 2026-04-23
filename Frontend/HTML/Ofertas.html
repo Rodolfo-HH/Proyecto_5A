@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARNNY | Ofertas</title>
+    <link rel="stylesheet" href="../css/EstilosOfertas.css">
+</head>
+<body>
+    <div id="Contenedor">
+        <header>
+            <img src="../Imagenes/logo.png" id="logo">
+            <h1>Carniceria "Mi Mary"</h1>
+            <span class="openbtn" onclick="openNav()">&#9776;</span>
+        </header>
+        <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="oevrlay-content"><br>
+                <a href="Productos.html"><img src="../Imagenes/Iconos/Product.ico" id="Iconos">Productos</a><br><br><hr>
+                <a href="Contactos.html"><img src="../Imagenes/Iconos/Contact.ico" id="Iconos">Contacto</a><br><br><hr>
+                <a href="PantallaPrincipal.html"><img src="../Imagenes/Iconos/Exit.ico" id="Iconos">Cerrar Sesión</a><br><br><hr>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <form class="form-busqueda">
+        <input type="text" placeholder="🔍 Buscar producto...">
+        <button type="submit"><i class="fas fa-search"></i></button>
+    </form>
+    <br>
+    <br>
+
+    <div class="container">
+        <div class="card">
+            <img src="../Imagenes/Manteca.png">
+
+            <img src="../Imagenes/descuento.png" class="badge">
+            <br>
+            <p>Nombre: Manteca</p>
+            <p><s>Precio Unitario: $55.00</s></p>
+            <p>Precio con Descuento: $49.50</p>
+            <br>
+            <button type="submit" id="detalle" onclick="validar1()">VER DETALLES</button>
+            <br>
+            <button type="submit" id="agregar" onclick="validar2()">AGREGAR AL CARRITO</button>
+        </div>
+
+        <div class="card">
+            <img src="../Imagenes/Res.png">
+
+            <img src="../Imagenes/descuento.png" class="badge">
+
+            <br>
+            <p>Nombre: Carne de Res</p>
+            <p><s>Precio Unitario: $220.00</s></p>
+            <p>Precio con Descuento: $198.00</p>
+            <br>
+            <button type="submit" id="detalle" onclick="validar3()">VER DETALLES</button>
+            <br>
+            <button type="submit" id="agregar" onclick="validar4()">AGREGAR AL CARRITO</button>
+        </div>
+
+        <div class="card">
+            <img src="../Imagenes/Lomo.png">
+
+            <img src="../Imagenes/descuento.png" class="badge">
+            <br>
+            <p>Nombre: Lomo</p>
+            <p><s>Precio Unitario: $120.00</s></p>
+            <p>Precio con Descuento: $108.00</p>
+            <br>
+            <button type="submit" id="detalle" onclick="validar5()">VER DETALLES</button>
+            <br>
+            <button type="submit" id="agregar" onclick="validar6()">AGREGAR AL CARRITO</button>
+        </div>
+
+        <div class="card">
+            <img src="../Imagenes/Costilla.png">
+
+            <img src="../Imagenes/descuento.png" class="badge">
+            <br>
+            <p>Nombre: Costilla de cerdo</p>
+            <p><s>Precio Unitario: $120.00</s></p>
+            <p>Precio con Descuento: $108.00</p>
+            <br>
+            <button type="submit" id="detalle" onclick="validar7()">VER DETALLES</button>
+            <br>
+            <button type="submit" id="agregar" onclick="validar8()">AGREGAR AL CARRITO</button>
+        </div>
+    </div>
+
+        
+    <script>
+            function openNav() {
+                document.getElementById("myNav").style.height = "260px";
+            }
+
+            function closeNav() {
+                document.getElementById("myNav").style.height = "0";
+            }
+            // Funciones de validacion para detalle del producto
+            function validar1() {
+                window.location.href = "Producto1.html"
+            }
+            function validar2() {
+                window.location.href = "Producto1.html"
+            }
+            function validar3() {
+                window.location.href = "Producto2.html"
+            }
+            function validar4() {
+                window.location.href = "Producto2.html"
+            }
+            function validar5() {
+                window.location.href = "Producto3.html"
+            }
+            function validar6() {
+                window.location.href = "Producto3.html"
+            }
+    </script>
+</body>
+</html>
