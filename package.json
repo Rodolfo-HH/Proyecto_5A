@@ -1,0 +1,32 @@
+{
+  "name": "proyecto_5a",
+  "version": "1.0.0",
+  "description": "<table width=\"80%\" margin=\"1\">\r <tr>\r <td width=\"50%\" align=\"center\"><img src=\"Frontend/Imagenes/logoOficial.png\"></td>\r <td width=\"100%\" align=\"center\"><img src=\"Frontend/Imagenes/logoti.png\"></td>\r </tr>\r </table>",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rodolfo-HH/Proyecto_5A.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Rodolfo-HH/Proyecto_5A/issues"
+  },
+  "homepage": "https://github.com/Rodolfo-HH/Proyecto_5A#readme",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0"
+  }
+}

@@ -4,72 +4,132 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de sesion</title>
-    <link rel="stylesheet" href="/Frontend/CSS/EstilosInicio.css">
+    <link rel="stylesheet" href="../CSS/EstilosInicio.css">
 </head>
+
 <body>
     <div id="Contenedor">
         <header id="uno">
-        <img src="/Frontend/Imagenes/logo.png" id="logo">
+            <img src="../Imagenes/logo.png" id="logo">
             <h1 align="center">Carniceria "Mi Mary"</h1>
             <nav>
                 <ul>
-                    <li><a href="/Frontend/HTML/PantallaRegistro.html">Registrarse</a></li>
+                    <li><a href="../HTML/PantallaRegistro.html">Registrarse</a></li>
                 </ul>
             </nav>
-        </div>
-    </header>
+        </header>
+    </div>
+    
     <section id="uno">
         <section id="form">
-            <form>
-                    <legend>Inicio de Sesión</legend>
-                    <label for="correoContacto">Correo electronico:</label><br>
-                    <input id="correoContacto" type="email" size="40" required placeholder="correo.@dominio.ext"><br>
-                    <label for="password">La contraseña de contener:</label>
-                    <ul>
-                        <li>Minimo 8 caracteres</li>
-                        <li>Una mayúscula</li>
-                        <li>Un numero</li>
-                        <li>Un simbolo</li>
-                    </ul>
-                    <input type="password" id="password" size="40" placeholder="Ingresa tu contraseña" maxlength="8" required>
-                    <p id="mensaje"></p>
-                    <h5>¿Se te a olvidado tu contraseña?<a href="ValidarContraseña.html" id="valC">Crear Contraseña</a></h5>
-                    <br>
-                    <div class="botones">
-                        <button type="submit" id="siguiente" onclick="validar()">Siguiente</button>
-                    </div>
-                    </div>
-                    <br>
-                    <p id="Cont">------ O continua con ------</p>
-                    <br>
-                    <button type="submit" id="btnGoogle"><img src="/Frontend/Imagenes/Iconos/Googleicon.ico" id="ImgGo"><a href="" id="G">Continuar con Google</a></button>
-                    <br>
-                    <br>
-                    <button type="submit" id="btnFacebook"><img src="/Frontend/Imagenes/Iconos/Facebookicon.ico" id="ImgFa"> <a href="" id="F">Continuar con Facebook</a></button><br>
-                    
-                    <script>
-                        function validar() {
-                        const password = document.getElementById('password').value;
-                        const mensaje = document.getElementById('mensaje');
-
-                        // Reglas: al menos una mayúscula, un número, un símbolo y máximo 8 caracteres
-                        const regex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_\-+=<>?]).{1,8}$/;
-
-                            if (!regex.test(password)) {
-                                mensaje.style.color = '#ffb3b3';
-                                mensaje.textContent = 'La contraseña debe tener al menos una mayúscula, un número y un símbolo.';
-                            } else {
-                                mensaje.style.color = '#b2ff59';
-                                mensaje.textContent = 'Contraseña válida. Puedes continuar.';
-                                window.location.href = "PantallaInicio.html";
-                            }
-                        }
-
-
-                    </script>
-
+            <form id="formLogin">
+                <legend>Inicio de Sesión</legend>
+                
+                <label for="correoContacto">Correo electronico:</label><br>
+                <input id="correoContacto" type="email" size="40" required placeholder="correo@dominio.ext"><br>
+                
+                <label for="password">Contraseña:</label><br>
+                <input type="password" id="password" size="40" placeholder="Ingresa tu contraseña" required><br><br>
+                
+                <label for="verificarPassword">Verificar contraseña:</label><br>
+                <input type="password" id="verificarPassword" size="40" placeholder="Repite tu contraseña" required>
+                
+                <h5>¿Se te ha olvidado tu contraseña?
+                    <a href="../HTML/ValidarContraseña.html" id="valC">Crear Contraseña</a>
+                </h5>
+                <br>
+                
+                <div class="botones">
+                    <button type="submit" id="siguiente">Siguiente</button>
+                </div>
+                
+                <br>
+                <p id="Cont">------ O continua con ------</p>
+                <br>
+                
+                <button type="button" id="btnGoogle">
+                    <img src="../Imagenes/Iconos/Google.png" id="ImgGo">
+                    <a href="http://localhost:3000/auth/google" id="G">Continuar con Google</a>
+                </button>
+                <br><br>
+                
+                <button type="button" id="btnFacebook">
+                    <img src="../Imagenes/Iconos/github.png" id="ImgFa"> 
+                    <a href="/auth/github" id="F">Continuar con GitHub</a>
+                </button><br>
             </form>
         </section>
     </section>
+
+    <!-- TOAST -->
+    <div id="toast"></div>
+
+    <script>
+        const API_URL = 'http://localhost:4000';
+
+        function mostrarToast(mensaje, tipo) {
+            const toast = document.getElementById('toast');
+            
+            toast.textContent = mensaje;
+            toast.className = 'show ' + tipo;
+
+            setTimeout(() => {
+                toast.className = toast.className.replace('show', '');
+            }, 3000);
+        }
+        
+        document.getElementById('formLogin').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const correo = document.getElementById('correoContacto').value.trim();
+            const password = document.getElementById('password').value;
+            const verificarPassword = document.getElementById('verificarPassword').value;
+            
+            if (!correo || !password || !verificarPassword) {
+                mostrarToast('⚠️ Completa todos los campos', 'error');
+                return;
+            }
+
+            if (password !== verificarPassword) {
+                mostrarToast('❌ Las contraseñas no coinciden', 'error');
+                return;
+            }
+
+            if (!correo.includes('@')) {
+                mostrarToast('⚠️ Ingresa un correo válido', 'error');
+                return;
+            }
+            
+            try {
+                const respuesta = await fetch(`${API_URL}/api/own/auth/login`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ correo, password })
+                });
+                
+                const resultado = await respuesta.json();
+                
+                if (respuesta.ok) {
+                    mostrarToast(' Bienvenido ' + resultado.usuario.nombre, 'success');
+                    
+                    localStorage.setItem('usuario', JSON.stringify(resultado.usuario));
+                    
+                    setTimeout(() => {
+                        window.location.href = "../HTML/PantallaInicio.html";
+                    }, 1000);
+                    
+                } else {
+                    mostrarToast('❌ ' + (resultado.error || 'Correo o contraseña incorrectos'), 'error');
+                }
+                
+            } catch (error) {
+                mostrarToast('❌ Error de conexión con el servidor', 'error');
+                console.error('Error:', error);
+            }
+        });
+        
+    </script>
 </body>
 </html>
