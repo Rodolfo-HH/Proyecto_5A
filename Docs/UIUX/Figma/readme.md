@@ -39,20 +39,27 @@ Ubicación: `/docs/uiux/`
 El diseño del sistema se desarrolló en distintas etapas para asegurar una buena experiencia de usuario:
 
 - Sketches  
+
 <p align="center">
-  <img src="img/" width="500">
+  <img src="/Docs/prompting/img/FigmaSketch.png" width="500">
 </p>
+
 - Wireframes  
+
 <p align="center">
-  <img src="img/" width="500">
+  <img src="/Docs/prompting/img/FigmaWireframes.png" width="500">
 </p>
+
 - Mockups  
+
 <p align="center">
-  <img src="img/" width="500">
+  <img src="/Docs/prompting/img/FigmaModkups.png" width="500">
 </p>
+
 - Prototipo navegacional  
+
 <p align="center">
-  <img src="img/" width="500">
+  <img src="/Docs/prompting/img/FigmaPrototipo.png" width="500">
 </p>
 
 📎 **Enlace Figma:**  
