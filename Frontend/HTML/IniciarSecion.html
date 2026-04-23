@@ -65,71 +65,71 @@
     <div id="toast"></div>
 
     <script>
-        const API_URL = 'http://localhost:4000';
+    function mostrarToast(mensaje, tipo) {
+        const toast = document.getElementById('toast');
+        
+        toast.textContent = mensaje;
+        toast.className = 'show ' + tipo;
 
-        function mostrarToast(mensaje, tipo) {
-            const toast = document.getElementById('toast');
-            
-            toast.textContent = mensaje;
-            toast.className = 'show ' + tipo;
+        setTimeout(() => {
+            toast.className = toast.className.replace('show', '');
+        }, 3000);
+    }
+    
+    document.getElementById('formLogin').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const correo = document.getElementById('correoContacto').value.trim();
+        const password = document.getElementById('password').value;
+        const verificarPassword = document.getElementById('verificarPassword').value;
+        
+        if (!correo || !password || !verificarPassword) {
+            mostrarToast('⚠️ Completa todos los campos', 'error');
+            return;
+        }
 
-            setTimeout(() => {
-                toast.className = toast.className.replace('show', '');
-            }, 3000);
+        if (password !== verificarPassword) {
+            mostrarToast('❌ Las contraseñas no coinciden', 'error');
+            return;
+        }
+
+        if (!correo.includes('@')) {
+            mostrarToast('⚠️ Ingresa un correo válido', 'error');
+            return;
         }
         
-        document.getElementById('formLogin').addEventListener('submit', async (e) => {
-            e.preventDefault();
+        try {
+            const respuesta = await fetch('/api/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ correo, password })
+            });
             
-            const correo = document.getElementById('correoContacto').value.trim();
-            const password = document.getElementById('password').value;
-            const verificarPassword = document.getElementById('verificarPassword').value;
-            
-            if (!correo || !password || !verificarPassword) {
-                mostrarToast('⚠️ Completa todos los campos', 'error');
-                return;
-            }
+            const resultado = await respuesta.json();
 
-            if (password !== verificarPassword) {
-                mostrarToast('❌ Las contraseñas no coinciden', 'error');
-                return;
-            }
-
-            if (!correo.includes('@')) {
-                mostrarToast('⚠️ Ingresa un correo válido', 'error');
-                return;
+            console.log("STATUS:", respuesta.status);
+            console.log("DATA:", resultado);
+            
+            if (respuesta.ok) {
+                mostrarToast('Bienvenido ' + resultado.usuario.nombre, 'success');
+                
+                localStorage.setItem('usuario', JSON.stringify(resultado.usuario));
+                
+                setTimeout(() => {
+                    window.location.href = "/html/PantallaInicio.html";
+                }, 1000);
+                
+            } else {
+                mostrarToast('❌ ' + (resultado.error || 'Correo o contraseña incorrectos'), 'error');
             }
             
-            try {
-                const respuesta = await fetch(`${API_URL}/api/own/auth/login`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ correo, password })
-                });
-                
-                const resultado = await respuesta.json();
-                
-                if (respuesta.ok) {
-                    mostrarToast(' Bienvenido ' + resultado.usuario.nombre, 'success');
-                    
-                    localStorage.setItem('usuario', JSON.stringify(resultado.usuario));
-                    
-                    setTimeout(() => {
-                        window.location.href = "../HTML/PantallaInicio.html";
-                    }, 1000);
-                    
-                } else {
-                    mostrarToast('❌ ' + (resultado.error || 'Correo o contraseña incorrectos'), 'error');
-                }
-                
-            } catch (error) {
-                mostrarToast('❌ Error de conexión con el servidor', 'error');
-                console.error('Error:', error);
-            }
-        });
-        
-    </script>
+        } catch (error) {
+            mostrarToast('❌ Error de conexión con el servidor', 'error');
+            console.error('Error:', error);
+        }
+    });
+</script>
 </body>
 </html>

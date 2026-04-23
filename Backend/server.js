@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const session = require('express-session');
 const passport = require('./config/passport');
+const usuariosRoutes = require('./routes/usuarios');
 const cors = require('cors');
 const Stripe = require('stripe');
 const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
@@ -44,7 +45,7 @@ app.get('/api/usuario', (req, res) => {
 // LOGOUT
 app.get('/logout', (req, res) => {
     req.logout(() => {
-        res.redirect('http://localhost:5500/HTML/PantallaInicio.html');
+        res.redirect('http://localhost:3000/HTML/PantallaInicio.html');
     });
 });
 
@@ -78,6 +79,8 @@ app.post('/api/pago/crear-sesion', async (req, res) => {
         res.status(500).json({ error: 'Error en pago' });
     }
 });
+
+app.use('/api', usuariosRoutes);
 
 // Servir frontend
 app.use(express.static(path.join(__dirname, '../Frontend')));
