@@ -15,7 +15,7 @@ a{
     padding: 0px;
 }
 header{
-    width: 1200px;
+    width: 1400px;
     height: 90px;
     color: #FFFFFF;
     display: flex;
@@ -129,6 +129,7 @@ section#Seccion0{
     width: 615px;
     height: 432px;
     margin: 5px;
+    margin-left: 150px;
     border-radius: 10px;
     float: left;
 }
@@ -184,7 +185,7 @@ section#Seccion5{
     margin: 10px;
     float: left;
     border-radius: 10px;
-    margin-left: 810px;
+    margin-left: 900px;
     margin-right: 500px;
     margin-top: -439px;
 }

@@ -15,6 +15,8 @@
 ## Legacy of the Final Code
 **Nombre del producto:**
 ## Proyecto - Carnny
+**Materia**
+## Aplicacione Web Orientada a Servicios
 
 ### Integrantes:
 
@@ -91,8 +93,6 @@ Finalmente, el desarrollo de esta aplicación web pretende contribuir a la moder
 <img src="Frontend/Imagenes/Diagrama.jpg" align="center" widht="50%">
 
 ## Sketches (2 Imagenes) con la URL del figma
-
-| https://www.figma.com/design/5TTR0lQmOuuWCCWujjaLZk/Proyecto-APPWEB---Carnny?node-id=203-392&t=kOQ9B1lPt5bf91IK-1 |
 
 <img src="Frontend/Imagenes/Sketch1.png" align="center" widht="50%"><br>
 
