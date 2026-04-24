@@ -55,6 +55,31 @@ Otro módulo importante es el registro de ventas, el cual permite a las cajeras(
 
 La interfaz de la aplicación web está diseñada como un panel administrativo, con formularios claros, tablas organizadas y opciones de navegación intuitivas, lo que mejora la eficiencia del trabajo diario. En conjunto, esta aplicación web contribuye a optimizar los procesos de la carnicería, mejorar el control de la información y brindar un mejor servicio al cliente. </p>
 
+### Problemática
+
+<p align="justify"> 
+Actualmente, muchas carnicerías tradicionales llevan el control de sus procesos de manera manual o con herramientas poco eficientes, lo que genera diversos problemas en la administración del negocio. Entre las principales dificultades se encuentran la falta de control preciso del inventario, errores en el registro de ventas, pérdida de información de clientes y desorganización en el manejo de productos.
+
+Además, el uso de métodos manuales dificulta la actualización en tiempo real de los datos, lo que puede provocar inconsistencias en el stock, afectando la disponibilidad de productos y generando pérdidas económicas. Asimismo, la atención al cliente se ve afectada debido a la lentitud en los procesos de venta y la falta de acceso rápido a información relevante como precios, promociones o historial de compras.
+
+Por otro lado, la ausencia de herramientas digitales limita la capacidad del negocio para modernizarse y competir en un entorno donde la tecnología juega un papel fundamental en la optimización de procesos y la mejora del servicio al cliente.
+
+</p>
+
+### Solución
+<p align="justify"> 
+
+Para dar solución a esta problemática, se propone el desarrollo de la aplicación web **Carnny**, una plataforma digital diseñada para optimizar la gestión administrativa y operativa de la carnicería. Esta aplicación permitirá centralizar toda la información del negocio en un solo sistema, facilitando el acceso, control y actualización de datos en tiempo real.
+
+Mediante el uso de esta herramienta, será posible llevar un control eficiente del inventario, reduciendo errores y evitando faltantes o pérdidas de productos. Asimismo, el sistema permitirá registrar las ventas de forma rápida y segura, mejorando la atención al cliente y agilizando los procesos en el punto de venta.
+
+La gestión de clientes también se verá fortalecida, permitiendo almacenar y consultar información de manera organizada para ofrecer un mejor servicio. Además, la aplicación incluirá módulos para administrar promociones, descuentos y recetas, contribuyendo a mejorar las estrategias de venta.
+
+Finalmente, la implementación de esta solución tecnológica permitirá modernizar la carnicería, incrementar la eficiencia operativa, mejorar la toma de decisiones y elevar la calidad del servicio, adaptándose a las necesidades actuales del mercado.
+
+</p>
+
+
 ### Objetivo General
 
 <p align="justify">
