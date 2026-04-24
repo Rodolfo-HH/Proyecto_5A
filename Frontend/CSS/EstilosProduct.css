@@ -9,7 +9,7 @@ a{
     color: #FFFFFF;
 }
 #Contenedor{
-    width: 100%;
+    width: auto;
     background: linear-gradient(#8B0000, #FF0000);
     border-radius: 10px 10px 0px 0px;
     padding: 0px;
@@ -81,7 +81,7 @@ hr{
 /*Boton desplegable*/
 /* MENU LATERAL DESDE LA DERECHA */
 .overlay {
-    height:0;
+    height: 0;
     width: 200px;
     position: absolute;
     z-index: 1;
@@ -98,7 +98,7 @@ hr{
     display: flex;
     flex-direction: column;
     text-align: left;
-    margin-top: 50px;
+    margin-top: -5px;
 }
 .overlay a {
     padding: 5px;
