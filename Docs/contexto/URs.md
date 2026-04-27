@@ -1,6 +1,6 @@
 # Roles de Usuario (User Roles)
 
-**Administrador:** El administrador del servidor puede acceder a la interfaz de administrador para realizar tareasadministrativas como modificar, registrar, eliminar y analiza el desempeño del negocio. Ademas de eso, tambien puede ver los privilegios de un rol de creador.
+**Administrador:** El administrador del servidor puede acceder a la interfaz de administrador para realizar tareas administrativas como modificar, registrar, eliminar y analiza el desempeño del negocio. Ademas de eso, tambien puede ver los privilegios de un rol de creador.
 
 **Cajero:** El cajero es el empleado de la carniceria que usa la aplicacion para la operacion diaria, es decir, para atender ventas en tienda, procesar pedidos online, actualizar precios y controlar el inventario de productos.
 
