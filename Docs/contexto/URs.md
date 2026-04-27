@@ -1,5 +1,4 @@
-# Requerimientos del Usuario (URS)
-
+# Roles de Usuario (User Roles)
 
 ## Módulo: Registro de Usuario
 

@@ -55,3 +55,4 @@ para informar a los clientes sobre descuentos y eventos importantes.
 Como usuario del sistema,
 quiero navegar fácilmente entre los módulos,
 para realizar mis tareas de forma rápida y ordenada.
+													
