@@ -1,7 +1,7 @@
 # Historias de usuario (User Stories)
 
 | **ID US** | **Prioridad** | **COMO (tipo de usuario)** | **QUIERO (realizar una tarea)**	| **PARA QUE PUEDA (el logro de algun objetivo)** |	
-|------------------------|-----------|------------------------|-----------------------------|---------------------------------------------|		
+|-----------|---------------|----------------------------|----------------------------------|-------------------------------------------------|		
 | **US-01**	| Alta | Como administrador y/o cajero. | Quiero iniciar sesión al ingresar en el sistema. | Para que pueda acceder a las funciones correspondientes según sea mi rol. |	
 | **US-02**	| Alta | Como administrador. | Quiero modificar, registrar y eliminar productos. | Para que pueda mantener actualizado de los cortes de carne. |
 | **US-03**	| Alta | Como administrador. | Quuiero administrar las categorias de los productos. | Para que pueda organizar mejor los cortes de carne. |												
