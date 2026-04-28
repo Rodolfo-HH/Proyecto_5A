@@ -1,0 +1,84 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Ofertas | CARNNY
+    link(rel="stylesheet" href="/css/output.css")
+
+  body.bg-gray-100
+
+    // HEADER
+    .bg-white.shadow.p-4.flex.justify-between.items-center
+      img(src="/img/logo.png" class="w-16")
+      h1.text-xl.font-bold Carniceria "Mi Mary"
+      button.text-2xl(onclick="openNav()") ☰
+
+    // MENÚ
+    #myNav.fixed.top-0.left-0.w-full.bg-black.text-white.overflow-hidden.transition-all.h-0
+      a.absolute.top-2.right-4.text-3xl(href="javascript:void(0)" onclick="closeNav()") ×
+      .flex.flex-col.items-center.mt-10.space-y-4
+        a(href="/productos") Productos
+        a(href="/contactos") Contacto
+        a(href="/") Cerrar Sesión
+
+    // BUSCADOR
+    .max-w-xl.mx-auto.mt-6.flex.gap-2
+      input.flex-1.border.rounded.p-2(type="text" placeholder="🔍 Buscar producto...")
+      button.bg-blue-500.text-white.p-2.rounded Buscar
+
+    // PRODUCTOS EN OFERTA
+    .grid.grid-cols-1.md:grid-cols-3.gap-6.p-6
+
+      // Producto 1
+      .bg-white.p-4.rounded.shadow.relative
+        img(src="/img/manteca.png" class="w-full h-40 object-cover")
+        img(src="/img/descuento.png" class="w-12 absolute top-2 right-2")
+        p Nombre: Manteca
+        p.line-through.text-gray-500 Precio Unitario: $55.00
+        p.text-green-600 Precio con Descuento: $49.50
+        button.bg-yellow-500.text-white.p-2.mt-2.w-full(onclick="detalle('Producto1')") VER DETALLES
+        button.bg-green-500.text-white.p-2.mt-2.w-full(onclick="detalle('Producto1')") AGREGAR AL CARRITO
+
+      // Producto 2
+      .bg-white.p-4.rounded.shadow.relative
+        img(src="/img/res.png" class="w-full h-40 object-cover")
+        img(src="/img/descuento.png" class="w-12 absolute top-2 right-2")
+        p Nombre: Carne de Res
+        p.line-through.text-gray-500 Precio Unitario: $220.00
+        p.text-green-600 Precio con Descuento: $198.00
+        button.bg-yellow-500.text-white.p-2.mt-2.w-full(onclick="detalle('Producto2')") VER DETALLES
+        button.bg-green-500.text-white.p-2.mt-2.w-full(onclick="detalle('Producto2')") AGREGAR AL CARRITO
+
+      // Producto 3
+      .bg-white.p-4.rounded.shadow.relative
+        img(src="/img/lomo.png" class="w-full h-40 object-cover")
+        img(src="/img/descuento.png" class="w-12 absolute top-2 right-2")
+        p Nombre: Lomo
+        p.line-through.text-gray-500 Precio Unitario: $120.00
+        p.text-green-600 Precio con Descuento: $108.00
+        button.bg-yellow-500.text-white.p-2.mt-2.w-full(onclick="detalle('Producto3')") VER DETALLES
+        button.bg-green-500.text-white.p-2.mt-2.w-full(onclick="detalle('Producto3')") AGREGAR AL CARRITO
+
+      // Producto 4
+      .bg-white.p-4.rounded.shadow.relative
+        img(src="/img/costilla.png" class="w-full h-40 object-cover")
+        img(src="/img/descuento.png" class="w-12 absolute top-2 right-2")
+        p Nombre: Costilla de cerdo
+        p.line-through.text-gray-500 Precio Unitario: $120.00
+        p.text-green-600 Precio con Descuento: $108.00
+        button.bg-yellow-500.text-white.p-2.mt-2.w-full(onclick="detalle('Producto4')") VER DETALLES
+        button.bg-green-500.text-white.p-2.mt-2.w-full(onclick="detalle('Producto4')") AGREGAR AL CARRITO
+
+    script.
+      function openNav() {
+        document.getElementById("myNav").style.height = "260px";
+      }
+
+      function closeNav() {
+        document.getElementById("myNav").style.height = "0";
+      }
+
+      function detalle(ruta) {
+        window.location.href = `/producto/${ruta}`;
+      }

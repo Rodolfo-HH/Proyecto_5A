@@ -1,0 +1,81 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Validar Contraseña
+    link(rel="stylesheet" href="/css/output.css")
+
+  body.bg-gray-100
+
+    .max-w-xl.mx-auto.p-6
+
+      header.mb-6.text-center
+        img(src="/img/logo.png" class="w-16 mx-auto")
+        h1.text-xl.font-bold Carniceria "Mi Mary"
+
+      .bg-white.p-6.rounded.shadow
+        form(onsubmit="return cambiarPassword()")
+
+          h3 Correo
+          input#correo.w-full.border.rounded.p-2.mb-3(type="email" placeholder="Tu correo..." required)
+
+          h3 Nueva contraseña
+          input#pass.w-full.border.rounded.p-2.mb-3(type="password" placeholder="Nueva contraseña..." required)
+
+          h3 Confirmar contraseña
+          input#val-pass.w-full.border.rounded.p-2.mb-3(type="password" placeholder="Confirmar contraseña..." required)
+
+          p#mensaje.mb-3
+
+          button.bg-blue-500.text-white.p-2.rounded.w-full(type="submit") Continuar
+
+    script.
+      function cambiarPassword() {
+
+        const correo = document.getElementById("correo").value;
+        const pass = document.getElementById("pass").value;
+        const valPass = document.getElementById("val-pass").value;
+        const mensaje = document.getElementById("mensaje");
+
+        if (pass !== valPass) {
+          mensaje.textContent = "La contraseña no coincide";
+          mensaje.style.color = "red";
+
+          setTimeout(() => {
+            mensaje.textContent = "";
+          }, 3000);
+
+          return false;
+        }
+
+        mensaje.textContent = "Contraseñas correctas";
+        mensaje.style.color = "green";
+
+        fetch('/api/crear-password', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            correo: correo,
+            password: pass
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+
+          if (data.error) {
+            alert(data.error);
+            return;
+          }
+
+          alert(data.mensaje);
+          window.location.href = "/login";
+
+        })
+        .catch(err => {
+          console.error(err);
+          alert("Error al actualizar contraseña");
+        });
+
+        return false;
+      }

@@ -1,0 +1,100 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Productos
+    link(rel="stylesheet" href="/css/output.css")
+
+  body.bg-gray-100
+
+    // HEADER
+    .bg-white.shadow.p-4.flex.justify-between.items-center
+      img(src="/img/logo.png" class="w-16")
+      h1.text-xl.font-bold Carniceria "Mi Mary"
+      button.text-2xl(onclick="openNav()") ☰
+
+    // MENÚ
+    #myNav.fixed.top-0.left-0.w-full.bg-black.text-white.overflow-hidden.transition-all.h-0
+      a.absolute.top-2.right-4.text-3xl(href="javascript:void(0)" onclick="closeNav()") ×
+      .flex.flex-col.items-center.mt-10.space-y-4
+        a(href="/ofertas") Ofertas
+        a(href="/contactos") Contacto
+        a(href="/logout") Cerrar Sesión
+
+    // BUSCADOR
+    .max-w-xl.mx-auto.mt-6.flex.gap-2
+      input.flex-1.border.rounded.p-2(type="text" placeholder="🔍 Buscar producto...")
+      button.bg-blue-500.text-white.p-2.rounded Buscar
+
+    // PRODUCTOS
+    .grid.grid-cols-1.md:grid-cols-3.gap-6.p-6
+
+      // Producto 1
+      .bg-white.p-4.rounded.shadow
+        img(src="/img/manteca.png" class="w-full h-40 object-cover")
+        p Nombre: Manteca
+        p Precio Unitario: $55.00
+        button.bg-yellow-500.text-white.p-2.mt-2.w-full(onclick="detalle('Producto1')") VER DETALLES
+        button.bg-green-500.text-white.p-2.mt-2.w-full(onclick="comprar('Manteca', 55)") COMPRAR
+
+      // Producto 2
+      .bg-white.p-4.rounded.shadow
+        img(src="/img/res.png" class="w-full h-40 object-cover")
+        p Nombre: Carne de Res
+        p Precio Unitario: $220.00
+        button.bg-yellow-500.text-white.p-2.mt-2.w-full(onclick="detalle('Producto2')") VER DETALLES
+        button.bg-green-500.text-white.p-2.mt-2.w-full(onclick="comprar('Carne de Res', 220)") COMPRAR
+
+      // Producto 3
+      .bg-white.p-4.rounded.shadow
+        img(src="/img/lomo.png" class="w-full h-40 object-cover")
+        p Nombre: Lomo
+        p Precio Unitario: $120.00
+        button.bg-yellow-500.text-white.p-2.mt-2.w-full(onclick="detalle('Producto3')") VER DETALLES
+        button.bg-green-500.text-white.p-2.mt-2.w-full(onclick="comprar('Lomo', 120)") COMPRAR
+
+      // Producto 4
+      .bg-white.p-4.rounded.shadow
+        img(src="/img/costilla.png" class="w-full h-40 object-cover")
+        p Nombre: Costilla de cerdo
+        p Precio Unitario: $120.00
+        button.bg-yellow-500.text-white.p-2.mt-2.w-full(onclick="detalle('Producto4')") VER DETALLES
+        button.bg-green-500.text-white.p-2.mt-2.w-full(onclick="comprar('Costilla de cerdo', 120)") COMPRAR
+
+    script.
+      function openNav() {
+        document.getElementById("myNav").style.height = "260px";
+      }
+
+      function closeNav() {
+        document.getElementById("myNav").style.height = "0";
+      }
+
+      function detalle(ruta) {
+        window.location.href = `/producto/${ruta}`;
+      }
+
+      async function comprar(nombre, precio) {
+        try {
+          const res = await fetch('/api/pago/crear-sesion', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'include',
+            body: JSON.stringify({ nombre, precio })
+          });
+
+          const data = await res.json();
+
+          if (!data.url) {
+            alert("Error al generar pago");
+            return;
+          }
+
+          window.location.href = data.url;
+
+        } catch (error) {
+          alert("Error en el pago");
+          console.error(error);
+        }
+      }

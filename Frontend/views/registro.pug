@@ -1,0 +1,107 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Registrate
+    link(rel="stylesheet" href="/css/output.css")
+
+  body.bg-gray-100
+    .max-w-3xl.mx-auto.p-6
+
+      // HEADER
+      header.flex.justify-between.items-center.mb-6
+        img(src="/img/logo.png" class="w-16")
+        h1.text-2xl.font-bold Carniceria "Mi Mary"
+        nav
+          ul
+            li
+              a.text-red-500(href="/") Salir
+
+      // FORMULARIO
+      section.bg-white.p-6.rounded.shadow
+        form#formRegistro
+          legend.text-xl.font-bold.mb-4 Registrate
+          h4.text-lg.mb-2 Datos Personales
+
+          label.block Nombre/Usuario:
+          input#nombre.w-full.border.rounded.p-2.mb-3(type="text" placeholder="Ingresa tu nombre..." required)
+
+          label.block Correo electronico:
+          input#correo.w-full.border.rounded.p-2.mb-3(type="email" placeholder="correo@ejemplo.com" required)
+
+          label.block Telefono:
+          input#telefono.w-full.border.rounded.p-2.mb-3(type="tel" placeholder="p.e: 555-540-60-70" required)
+
+          label.block Dirección:
+          input#direccion.w-full.border.rounded.p-2.mb-3(type="text" placeholder="Ingresa tu dirección..." required)
+
+          label.block Contraseña:
+          input#password.w-full.border.rounded.p-2.mb-3(type="password" placeholder="Crea una contraseña" required)
+
+          label.block Confirmar contraseña:
+          input#confirmarPassword.w-full.border.rounded.p-2.mb-3(type="password" placeholder="Repite tu contraseña" required)
+
+          button.bg-blue-500.text-white.p-2.rounded.w-full(type="submit") Continuar
+
+          p.text-center.my-4 ------ O continuar con ------
+
+          button.bg-red-500.text-white.p-2.rounded.w-full.mb-2(type="button" onclick="window.location.href='http://localhost:3000/auth/google'")
+            | Continuar con Google
+
+          button.bg-gray-800.text-white.p-2.rounded.w-full(type="button" onclick="window.location.href='http://localhost:3000/auth/github'")
+            | Continuar con GitHub
+
+    script.
+      document.getElementById('formRegistro').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const nombre = document.getElementById("nombre").value.trim();
+        const correo = document.getElementById("correo").value.trim();
+        const telefono = document.getElementById("telefono").value.trim();
+        const direccion = document.getElementById("direccion").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmarPassword = document.getElementById("confirmarPassword").value;
+
+        if(nombre === "" || correo === "" || telefono === "" || direccion === "" || password === ""){
+          alert("⚠️ Por favor llena todos los campos");
+          return;
+        }
+
+        if(!correo.includes("@")){
+          alert("⚠️ Ingresa un correo válido");
+          return;
+        }
+
+        if(password !== confirmarPassword){
+          alert("⚠️ Las contraseñas no coinciden");
+          return;
+        }
+
+        if(password.length < 8){
+          alert("⚠️ La contraseña debe tener al menos 8 caracteres");
+          return;
+        }
+
+        const datos = { nombre, correo, telefono, direccion, password };
+
+        try {
+          const respuesta = await fetch('/api/registro', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(datos)
+          });
+
+          const resultado = await respuesta.json();
+
+          if (respuesta.ok) {
+            alert('¡Registro exitoso! Ahora inicia sesión.');
+            window.location.href = "/login";
+          } else {
+            alert(resultado.error || 'Error en el registro');
+          }
+        } catch (error) {
+          alert('Error de conexión. Verifica que el servidor esté corriendo.');
+          console.error(error);
+        }
+      });

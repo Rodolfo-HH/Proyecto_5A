@@ -1,0 +1,26 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    title Compra Exitosa
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet" href="/css/output.css")
+
+  body.bg-gray-100.flex.flex-col.min-h-screen
+
+    // HEADER
+    header.bg-white.shadow.p-4.flex.items-center.gap-4
+      img(src="/img/logo.png" class="w-16")
+      h1.text-xl.font-bold Carniceria "Mi Mary"
+
+    // CONTENIDO
+    .flex-grow.flex.items-center.justify-center
+      .bg-white.p-8.rounded.shadow.text-center.max-w-md
+
+        .text-green-500.text-5xl.mb-4 ✔
+
+        h2.text-2xl.font-bold.mb-2 ¡Pago realizado con éxito!
+        p.text-gray-600.mb-6 Gracias por tu compra 🥩
+
+        a.bg-blue-500.text-white.px-4.py-2.rounded(href="/inicio")
+          | Volver al inicio

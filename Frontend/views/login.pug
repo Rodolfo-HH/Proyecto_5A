@@ -1,0 +1,150 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Inicio de Sesión
+    link(rel="stylesheet" href="/css/output.css")
+
+    // Solo estilos necesarios (toast)
+    style.
+      #toast {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 12px 18px;
+        border-radius: 8px;
+        font-weight: bold;
+        display: none;
+        z-index: 9999;
+      }
+
+  body.bg-[#F5E6CC].min-h-screen.flex.items-center.justify-center
+
+    .w-full.max-w-md
+
+      // HEADER
+      header.bg-gradient-to-r.from-red-900.to-red-500.text-white.shadow-lg.p-4.flex.justify-between.items-center.rounded-t-xl
+        img(src="/img/logo.png" class="w-14")
+        h1.text-lg.font-bold Carniceria "Mi Mary"
+        a.text-sm.underline(href="/registro") Registrarse
+
+      // FORMULARIO
+      .bg-white.p-6.shadow-lg.rounded-b-xl
+
+        form#formLogin.flex.flex-col.gap-3
+
+          legend.text-xl.font-bold.text-center.mb-2 Inicio de Sesión
+
+          label.text-sm.font-semibold Correo electrónico
+          input#correoContacto.w-full.border.border-gray-300.rounded-lg.p-2.focus:outline-none.focus:ring-2.focus:ring-red-400(
+            type="email",
+            placeholder="correo@dominio.ext",
+            required
+          )
+
+          label.text-sm.font-semibold Contraseña
+          input#password.w-full.border.border-gray-300.rounded-lg.p-2.focus:outline-none.focus:ring-2.focus:ring-red-400(
+            type="password",
+            placeholder="Ingresa tu contraseña",
+            required
+          )
+
+          label.text-sm.font-semibold Verificar contraseña
+          input#verificarPassword.w-full.border.border-gray-300.rounded-lg.p-2.focus:outline-none.focus:ring-2.focus:ring-red-400(
+            type="password",
+            placeholder="Repite tu contraseña",
+            required
+          )
+
+          p.text-sm.text-gray-600
+            | ¿Se te olvidó tu contraseña?
+            a.text-blue-500.ml-2.hover:underline(href="/validar") Crear contraseña
+
+          button.bg-green-500.hover:bg-green-600.text-white.p-2.rounded-lg.mt-2(type="submit")
+            | Siguiente
+
+          p.text-center.text-gray-400.my-2 ------ O continua con ------
+
+          button.bg-red-500.hover:bg-red-600.text-white.p-2.rounded-lg(
+            type="button",
+            onclick="window.location.href='/auth/google'"
+          ) Continuar con Google
+
+          button.bg-gray-800.hover:bg-gray-900.text-white.p-2.rounded-lg(
+            type="button",
+            onclick="window.location.href='/auth/github'"
+          ) Continuar con GitHub
+
+    // TOAST
+    #toast.text-white
+
+    script.
+      function mostrarToast(mensaje, tipo) {
+        const toast = document.getElementById('toast');
+        toast.textContent = mensaje;
+
+        toast.style.display = "block";
+
+        toast.className = "text-white";
+
+        if (tipo === 'error') {
+          toast.classList.add('bg-red-500');
+        } else {
+          toast.classList.add('bg-green-500');
+        }
+
+        setTimeout(() => {
+          toast.style.display = "none";
+        }, 3000);
+      }
+
+      document.getElementById('formLogin').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const correo = document.getElementById('correoContacto').value.trim();
+        const password = document.getElementById('password').value;
+        const verificarPassword = document.getElementById('verificarPassword').value;
+
+        if (!correo || !password || !verificarPassword) {
+          mostrarToast('⚠️ Completa todos los campos', 'error');
+          return;
+        }
+
+        if (password !== verificarPassword) {
+          mostrarToast('❌ Las contraseñas no coinciden', 'error');
+          return;
+        }
+
+        if (!correo.includes('@')) {
+          mostrarToast('⚠️ Ingresa un correo válido', 'error');
+          return;
+        }
+
+        try {
+          const respuesta = await fetch('/api/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ correo, password })
+          });
+
+          const resultado = await respuesta.json();
+
+          if (respuesta.ok) {
+            mostrarToast('Bienvenido ' + resultado.usuario.nombre, 'success');
+
+            localStorage.setItem('usuario', JSON.stringify(resultado.usuario));
+
+            setTimeout(() => {
+              window.location.href = "/inicio";
+            }, 1000);
+
+          } else {
+            mostrarToast('❌ ' + (resultado.error || 'Correo o contraseña incorrectos'), 'error');
+          }
+
+        } catch (error) {
+          mostrarToast('❌ Error de conexión con el servidor', 'error');
+          console.error(error);
+        }
+      });

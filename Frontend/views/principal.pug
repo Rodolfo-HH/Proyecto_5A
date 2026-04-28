@@ -1,0 +1,94 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Pantalla Principal
+    link(rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css")
+    script(src="https://cdn.tailwindcss.com")
+
+  body(class="bg-[#F5E6CC] min-h-screen")
+
+    //- NAVBAR
+    header(class="bg-gradient-to-b from-[#8B0000] to-[#FF0000] text-white flex items-center justify-between px-10 py-4 rounded-b-xl shadow-lg")
+      img(src="../Frontend/Imagenes/logo.png" class="w-20 h-20 object-contain")
+      h1(class="text-2xl font-bold tracking-wide") Carnicería "Mi Mary"
+      nav
+        ul#menu(class="flex gap-6 text-sm font-semibold")
+          //- Se llena dinámicamente con JS
+
+    //- CONTENIDO PRINCIPAL
+    div(class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto mt-6")
+
+      //- Información
+      div(class="bg-white rounded-xl shadow-md p-6 border-l-4 border-[#8B0000]")
+        h2(class="text-xl font-bold text-[#8B0000] mb-3") Información de la carnicería
+        p(class="text-gray-700 leading-relaxed text-sm")
+          | En Carnicería "Mi Mary" nos especializamos en ofrecer
+          br
+          | los mejores cortes de res y cerdo, siempre fresco y con la
+          br
+          | mejor calidad. Atención personalizada y precios accesibles.
+          br
+          | ¡Calidad, sabor y confianza en cada visita!
+
+      //- Imagen
+      img(src="/img/principal.jpg" class="rounded-xl shadow-md w-full h-full object-cover")
+
+    //- MAPA
+    div(class="px-6 pb-6 max-w-5xl mx-auto")
+      h2(class="text-xl font-bold text-[#8B0000] mb-3") Ubicación
+      div(class="rounded-xl overflow-hidden border-4 border-[#8B0000] shadow-md")
+        #map(style="width:100%; height:350px;")
+
+    //- FOOTER
+    footer(class="bg-gradient-to-b from-[#FF0000] to-[#8B0000] text-white mt-6 rounded-t-xl py-5 px-10 flex flex-col md:flex-row justify-around items-center gap-2 text-sm")
+      p 📞 Teléfono: 764 764 3868
+      p 💬 WhatsApp: 764 117 85 68
+      p 📘 Facebook: Carnicería "Mi Mary"
+
+    script(src="https://unpkg.com/leaflet/dist/leaflet.js")
+
+    script.
+      // Mapa
+      const map = L.map('map').setView([19.0414, -98.2063], 15);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+      L.marker([19.0414, -98.2063]).addTo(map)
+        .bindPopup("Carnicería 'Mi Mary' 📍")
+        .openPopup();
+
+      // Menú dinámico
+      fetch('/api/usuario', { credentials: 'include' })
+        .then(res => res.json())
+        .then(data => {
+          const nav = document.getElementById("menu");
+          if (data.logueado) {
+            nav.innerHTML = `
+              <li class="text-white/90">👋 ${data.usuario.nombre}</li>
+              <li>
+                <a href="/logout"
+                   class="bg-white text-[#8B0000] px-3 py-1 rounded-full font-bold hover:bg-red-100 transition">
+                  Cerrar sesión
+                </a>
+              </li>
+            `;
+          } else {
+            nav.innerHTML = `
+              <li>
+                <a href="/login"
+                   class="bg-white text-[#8B0000] px-3 py-1 rounded-full font-bold hover:bg-red-100 transition">
+                  Iniciar Sesión
+                </a>
+              </li>
+              <li>
+                <a href="/registro"
+                   class="border border-white text-white px-3 py-1 rounded-full font-bold hover:bg-white hover:text-[#8B0000] transition">
+                  Registrarse
+                </a>
+              </li>
+            `;
+          }
+        })
+        .catch(err => console.error("Error obteniendo usuario:", err));
